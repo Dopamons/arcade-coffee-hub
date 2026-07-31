@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>아케이드커피 — 동선·가구 배치</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=8">
+<style>
+  .flow{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+  .fstep{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 14px;box-shadow:var(--sh-1);position:relative}
+  .fstep .fn{width:26px;height:26px;border-radius:50%;background:var(--ink);color:#f0cd85;display:grid;place-items:center;font-weight:800;font-size:13px;margin-bottom:8px}
+  .fstep b{display:block;font-size:15.5px;margin-bottom:4px}
+  .fstep span{font-size:13.5px;color:var(--sub);line-height:1.55;display:block}
+  .fstep.wait{opacity:.55;border-style:dashed}
+  .imgs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+  .imgs figure{margin:0;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:var(--sh-1)}
+  .imgs img{width:100%;height:150px;object-fit:cover;display:block}
+  .imgs figcaption{padding:8px 11px;font-size:13.5px;color:var(--sub);line-height:1.5}
+  @media (max-width:980px){.flow{grid-template-columns:1fr 1fr}.imgs{grid-template-columns:1fr 1fr}}
+</style>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>">
+</head>
+<body>
+<div class="app">
+
+<aside class="side">
+  <div>
+    <div class="mark"><img src="assets/logo.png?v=1" alt="ARCADE COFFEE" onload="this.parentNode.classList.add('has-logo')" onerror="this.remove()"><span class="mark-txt">ARCADE<br>COFFEE</span></div>
+    <h1>1층 재오픈<br>프로젝트 허브</h1>
+    <p class="meta">2026년 10월 오픈<br>보고 황정인 대표 · 황헌주 대표</p>
+  </div>
+  <nav>
+    <a href="brand.html"><i>BR</i><span>브랜드 방향</span></a>
+    <a href="index.html"><i>00</i><span>전체 요약</span></a>
+    <a href="market.html"><i>01</i><span>시장조사</span></a>
+    <a href="menu.html"><i>02</i><span>시그니처 메뉴</span></a>
+    <a href="space.html"><i>03</i><span>공간·1층 단장</span></a>
+    <a href="layout.html" class="on"><i>3-1</i><span>동선·가구 배치</span></a>
+    <a href="procure.html"><i>3-2</i><span>가구·조명 조달</span></a>
+    <a href="marketing.html"><i>04</i><span>마케팅·리뷰</span></a>
+    <a href="ops.html"><i>05</i><span>운영·업무 분담</span></a>
+    <a href="outlook.html"><i>06</i><span>전망·리스크와 기회</span></a>
+  </nav>
+  <div class="foot">내부 검토용 · 외부 공개 아님<br>평면도 수령 후 배치안이 이 페이지에 올라옵니다</div>
+</aside>
+
+<main class="main">
+
+<div class="hero">
+  <div class="inner">
+    <span class="eyebrow">03-1 동선·가구 배치</span>
+    <h2>사람이 움직이는 길을 먼저 그리고, 가구는 그 다음</h2>
+    <p>03이 "무엇을 유지하고 무엇을 바꾸나"라면, 이 페이지는 "어디에 어떻게 놓나"입니다.
+    평면도(8/6 예정)가 오면 동선 분석 → 배치안 2~3개 → 배치안별 예상 매출 → 3D 화면 순서로 여기서 진행됩니다.
+    지금은 그 작업의 기준과 준비 상태를 적어 둡니다.</p>
+  </div>
+</div>
+
+<div class="inner">
+
+<section id="proc">
+  <div class="sec-h"><span class="no">1</span><div>
+    <h3>진행 절차 — 평면도가 오면 이 순서로</h3>
+    <p class="sub">흐리게 표시된 단계는 평면도 대기 중</p>
+  </div></div>
+  <div class="rule"></div>
+
+  <div class="flow">
+    <div class="fstep"><span class="fn">1</span><b>기준 확정</b><span>배치 원칙·동선 기준 (이 페이지 2·3장 — 완료)</span></div>
+    <div class="fstep wait"><span class="fn">2</span><b>유효 면적 정리</b><span>평면도에서 주방·백야드 빼고 실제 영업 면적 산출</span></div>
+    <div class="fstep wait"><span class="fn">3</span><b>배치안 2~3개</b><span>2인·4인·바·모임 조합별 좌석 수 확정</span></div>
+    <div class="fstep wait"><span class="fn">4</span><b>동선 검증 + 매출 계산</b><span>좌석 수 × 회전율 × 1인 지출 — 배치안별 비교</span></div>
+    <div class="fstep wait"><span class="fn">5</span><b>3D 화면</b><span>확정 배치안을 사진 위 AI 렌더로 — 공사 전에 눈으로 확인</span></div>
+  </div>
+
+  <div class="note why">
+    <b>순서가 이런 이유</b>
+    가구를 먼저 사면 배치가 가구에 맞춰지고, 배치를 먼저 그리면 가구 수량이 정확해집니다.
+    수량이 정확하면 중고로 천천히 모을 수 있습니다. 그래서 구매는 배치안 확정(3단계) 뒤입니다.
+  </div>
+</section>
+
+<section id="rules">
+  <div class="sec-h"><span class="no">2</span><div>
+    <h3>확정된 배치 원칙</h3>
+    <p class="sub">인테리어 창 확정(D 코드) — 배치안은 이 원칙 안에서만 그립니다</p>
+  </div></div>
+  <div class="rule"></div>
+
+  <div class="tw"><table>
+    <thead><tr><th style="width:22%">원칙</th><th>내용</th><th style="width:26%">근거</th></tr></thead>
+    <tbody>
+      <tr><td><b>군집 배치</b> (D-01)</td><td>2~4인 소형 테이블을 3~4개씩 묶고, 묶음 사이는 화분·러그·조명 높이 차로 구획. 벽·문 없이 구역감을 만듦</td><td>손님 목소리: "테이블이 너무 넓어서 대화가 안 되는 느낌" — 대화 단위로 쪼갬</td></tr>
+      <tr><td><b>창가 = 1~2인 바 스툴</b></td><td>통유리 앞은 밖에서 보이는 자리 — 혼자 온 손님과 짧은 체류를 창가로</td><td>1층 역할(노출·회전)과 일치. 안이 차 있어 보이는 효과</td></tr>
+      <tr><td><b>4인 테이블 규격 통일</b></td><td>같은 규격이라 붙였다 떼서 단체 대응 — 전용 대형 테이블을 두지 않음</td><td>2층에서 이미 쓰는 방식의 확장</td></tr>
+      <tr><td><b>모임 공간</b> (D-03·04)</td><td>문·커튼 없이 톤과 조명으로만 구분. 최소 주문금액제(자릿세 0원)</td><td>막힌 방은 청소년 출입 규제 업소 분류 위험</td></tr>
+      <tr><td><b>긴 공용 테이블 금지</b></td><td>합석 구조를 만들지 않음</td><td>손님 목소리: 합석이 되면 "아예 나가버립니다"</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="lines">
+  <div class="sec-h"><span class="no">3</span><div>
+    <h3>동선 기준 — 배치안을 검증할 잣대</h3>
+    <p class="sub">배치안이 나오면 이 여섯 개로 통과·탈락을 가립니다</p>
+  </div></div>
+  <div class="rule"></div>
+
+  <div class="tw"><table>
+    <thead><tr><th style="width:28%">동선</th><th>기준</th></tr></thead>
+    <tbody>
+      <tr><td><b>주문 → 픽업 → 착석</b></td><td>세 지점이 한 방향으로 흐르고 서로 교차하지 않을 것. 픽업 대기자가 통로를 막지 않을 것</td></tr>
+      <tr><td><b>통로 폭</b></td><td>주 통로 900mm 이상 (쟁반 든 사람 둘이 비켜 갈 폭 — 업계 통용 기준, 3급)</td></tr>
+      <tr><td><b>테이크아웃 분리</b></td><td>포장 손님이 홀을 가로지르지 않고 카운터 근처에서 회전 — 100m 안 67곳 식후 수요를 빠르게 받는 구조</td></tr>
+      <tr><td><b>1층 → 2층 유도</b></td><td>계단 입구가 카운터에서 자연스럽게 보일 것 — 1층 만석 시 2층 안내가 말 한마디로 되게</td></tr>
+      <tr><td><b>밖에서 보이는 그림</b></td><td>통유리로 보이는 첫 장면이 좌석과 조명일 것 (창고·집기 노출 금지) — 걸어오는 손님이 첫 손님</td></tr>
+      <tr><td><b>야간 모드</b></td><td>21시 이후 조명을 낮췄을 때(밝기 조절 회로) 나이트캡 분위기가 되는 배치 — 밤 전략과 연결</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="note good">
+    <b>매장 앞 인구 동선도 같이 봅니다</b>
+    8월 통행량 실측(평일 점심 · 평일 21~23시 · 토요일 저녁, 매장 앞 3구간)이 끝나면
+    "몇 시에 어느 방향에서 사람이 오는가"가 나옵니다. 입구·간판·창가 배치는 그 결과를 반영합니다 —
+    안의 동선은 평면도로, 밖의 동선은 실측으로 그립니다.
+  </div>
+</section>
+
+<section id="lightsound">
+  <div class="sec-h"><span class="no">4</span><div>
+    <h3>조명·음향 배치 기준</h3>
+    <p class="sub">배치안에 조명·스피커 위치가 같이 그려져야 공사를 한 번에 끝냅니다</p>
+  </div></div>
+  <div class="rule"></div>
+
+  <div class="cols2">
+    <div class="card">
+      <h4 style="margin-top:2px">조명 — 자리 위에 빛을 놓는다</h4>
+      <ul class="tight">
+        <li><b>색온도 2700K(전구색) 통일</b> — 브랜드 시각 규칙과 동일. 기존 기구가 다른 색이면 램프 교체</li>
+        <li>펜던트는 <b>테이블 위에만</b> — 전구 하단이 상판 위 700~800mm. 배치안의 테이블 위치가 확정돼야 펜던트 위치가 나옵니다</li>
+        <li><b>구역별 회로 분리 + 밝기 조절</b> — 홀/창가/모임 구역을 따로 조절. 21시 이후 밝기를 낮춰 밤 분위기로 전환(나이트캡 시간대)</li>
+        <li>갤러리월 스포트는 테이블 조명과 별도 회로</li>
+        <li>목표 밝기(업계 통용, 3급): 객석 100~200 lux · 카운터 300~500 · 쇼케이스 500 이상 · 통로 75~150</li>
+      </ul>
+      <p class="muted">기구는 D-05 확정대로 펜던트 1종만 교체(레일 어댑터형), 레일·라인·다운라이트 존치 — 지출 최소 원칙과 일치</p>
+    </div>
+    <div class="card">
+      <h4 style="margin-top:2px">음향 — 소리를 나눈다</h4>
+      <ul class="tight">
+        <li><b>스피커는 한 곳에서 크게 대신 여러 곳에서 작게</b> — 분산 배치가 같은 체감 음량에서 대화를 덜 방해합니다 (업계 통용, 3급)</li>
+        <li>모임 구역은 스피커가 정면으로 향하지 않게 — 대화 전용 구역이라서</li>
+        <li>볼륨 기준은 운영 체크리스트에 이미 반영("대화 가능한 수준") — 운영으로 지킵니다</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="now">
+  <div class="sec-h"><span class="no">5</span><div>
+    <h3>현재 공간 — 배치 전(前) 기록</h3>
+    <p class="sub">2026-07-31 촬영 22장. 배치안을 만들기 전의 상태를 그대로 남겨 둡니다 ·
+    단장 뒤에 같은 각도로 다시 찍으면 무엇이 달라졌는지 두 분이 바로 보실 수 있습니다</p>
+  </div></div>
+  <div class="rule"></div>
+
+  <h4 class="shots-h">1층 실내 <span>단장 대상 — 동선이 실제로 만들어지는 곳</span></h4>
+  <div class="shots">
+    <figure><img src="assets/before/b17-1f-front-tables.webp" alt="1층 정면에서 본 테이블"><figcaption><b>정면 첫 장면</b> — 통유리로 들어왔을 때 처음 보이는 구간(동선 잣대 5번)</figcaption></figure>
+    <figure><img src="assets/before/b11-1f-hall-bar-view.webp" alt="1층 메인 홀과 바 방향"><figcaption><b>메인 홀 전경</b> — 왼쪽이 바, 오른쪽이 창가. 테이블마다 붙은 태블릿 스탠드는 철거 대상</figcaption></figure>
+    <figure><img src="assets/before/b18-1f-bar.webp" alt="1층 바 카운터"><figcaption><b>바 카운터</b> — 주문·픽업 동선의 기점. 뒤쪽 주류 진열은 정리 대상</figcaption></figure>
+    <figure><img src="assets/before/b19-1f-fridge-showcase.webp" alt="디저트 쇼케이스와 냉장고"><figcaption><b>쇼케이스·냉장고</b> — 납품 디저트를 그대로 올릴 수 있는 설비</figcaption></figure>
+    <figure><img src="assets/before/b20-1f-photobooth.webp" alt="포토부스 그래픽 벽"><figcaption><b>포토부스 벽</b> — 철거 예정. 없어지면 홀이 한 덩어리로 트입니다</figcaption></figure>
+    <figure><img src="assets/before/b10-1f-projection-wall.webp" alt="프로젝션 벽면과 원목 테이블"><figcaption><b>프로젝션 벽</b> — 야간 영상용으로 쓸 수 있는 면. 앞은 원목 6인석</figcaption></figure>
+    <figure><img src="assets/before/b12-1f-stair-under.webp" alt="계단 하부 좌석"><figcaption><b>계단 하부</b> — 천장이 경사진 아늑한 구역. 조명 보강이 필요합니다</figcaption></figure>
+    <figure><img src="assets/before/b13-1f-stair-under2.webp" alt="계단 하부 좌석 안쪽"><figcaption>같은 구역 안쪽 — 벽면이 넓어 조명·아트 적용 여지가 있습니다</figcaption></figure>
+    <figure><img src="assets/before/b21-1f-back-hall.webp" alt="1층 안쪽 홀"><figcaption><b>안쪽 홀</b> — 검정 대형 테이블 2열. 철거 확정(2026-07-31)이라 이 구역은 배치를 새로 짭니다</figcaption></figure>
+    <figure><img src="assets/before/b22-1f-back-hall2.webp" alt="1층 안쪽 홀 PUFF 로고 벽"><figcaption>같은 홀 — PUFF 로고 강판 벽. 마감 교체 대상</figcaption></figure>
+  </div>
+
+  <h4 class="shots-h">1층 외부 · 앞마당 <span>첫인상과 야간 조명</span></h4>
+  <div class="shots">
+    <figure><img src="assets/before/b16-out-front.webp" alt="가게 전면"><figcaption><b>전면</b> — 계단·조경·사인. 지나가는 사람이 보는 장면</figcaption></figure>
+    <figure><img src="assets/before/b15-out-entrance.webp" alt="입구와 왼쪽 테라스"><figcaption><b>입구</b> — 외부 PUFF 사인이 정면에 있습니다. 교체 1순위</figcaption></figure>
+    <figure><img src="assets/before/b14-out-parking.webp" alt="외부 주차장과 테라스"><figcaption><b>주차 3대</b> — 앞마당 좌석과 붙어 있어 배치 시 분리가 필요합니다</figcaption></figure>
+    <figure><img src="assets/before/b08-yard-pole-string.webp" alt="앞마당 철기둥과 전구 배선"><figcaption><b>철기둥·전구 라인</b> — 이미 설치되어 있습니다. 전구만 2700K로 교체</figcaption></figure>
+    <figure><img src="assets/before/b09-yard-shade.webp" alt="앞마당 차양"><figcaption><b>차양 3장</b> — 낮 그늘과 야간 조명이 동시에 걸려 있는 구조</figcaption></figure>
+  </div>
+
+  <h4 class="shots-h">2층 · 테라스 <span>재사용 자산 — 1층 배치의 예비 물량</span></h4>
+  <div class="shots">
+    <figure><img src="assets/before/b04-2f-table-caster.webp" alt="2층 바퀴 달린 흰 사각 테이블"><figcaption><b>바퀴 달린 사각 테이블</b> — 붙였다 떼기가 되는 규격. 모임 좌석의 핵심</figcaption></figure>
+    <figure><img src="assets/before/b05-2f-round-table.webp" alt="2층 원형 테이블"><figcaption>원형 2인 테이블 — 회전이 빠른 규격</figcaption></figure>
+    <figure><img src="assets/before/b06-2f-long-table.webp" alt="2층 긴 공용 테이블"><figcaption>긴 공용 테이블 — 2층 존치. 배치 원칙상 1층에는 긴 공용 테이블을 두지 않습니다</figcaption></figure>
+    <figure><img src="assets/before/b07-2f-window.webp" alt="2층 창가 좌석"><figcaption>창가 라인 — 통유리 쪽 좌석 배치의 참고</figcaption></figure>
+    <figure><img src="assets/before/b01-2f-terrace-set.webp" alt="2층 테라스 2인 세트"><figcaption><b>테라스 2인 세트</b> — 메쉬 테이블 + 접이식 의자. 좌면 대책 대상</figcaption></figure>
+    <figure><img src="assets/before/b02-2f-terrace-set2.webp" alt="2층 테라스 좌석"><figcaption>같은 세트 여러 조 — 수량은 실측으로 확정</figcaption></figure>
+    <figure><img src="assets/before/b03-2f-terrace-layout.webp" alt="2층 테라스 배치 구조"><figcaption>테라스 배치 — 난간을 따라 늘어놓은 현재 구조</figcaption></figure>
+  </div>
+
+  <p class="muted">출처: 매장 실물 촬영, 2026-07-31 · 원본 <code>hub/assets/before/</code> ·
+  3D 화면은 배치안 확정 후 이 사진들 위에 AI 렌더로 만듭니다(방식 확인 완료 — 07-media에 렌더 시안 이력 있음).</p>
+</section>
+
+<section id="need">
+  <div class="sec-h"><span class="no">5</span><div>
+    <h3>이 페이지가 채워지는 조건</h3>
+    <p class="sub">두 가지가 오면 2~5단계가 돌아갑니다</p>
+  </div></div>
+  <div class="rule"></div>
+  <ul class="tight">
+    <li><b>1층 평면도</b> — 치수 있는 도면이 최선, 없으면 줄자 실측 사진으로도 시작 가능. 급수·배수·전기 위치 포함</li>
+    <li><b>목표 좌석 수</b> 또는 최대 수용 인원 — 없으면 배치안을 좌석 수별로 2~3개 만들어 고르시게 합니다</li>
+  </ul>
+</section>
+
+<details class="ai">
+  <summary><span><span class="tag-ai">AI 분석</span>배치를 보고 드리는 참고 의견</span><span class="chev"></span></summary>
+  <div class="body">
+    <p><b>배치에서 매출을 가르는 건 좌석 수보다 회전 구조입니다.</b> 같은 30석이어도 "창가 바 + 2인 군집" 구성과
+    "4인 테이블만" 구성은 받을 수 있는 손님 수가 다릅니다. 우리 손님의 다수가 2인(대화·데이트)이라,
+    2인 자리를 많이 만드는 배치가 좌석 수를 줄이더라도 실제 수용은 늘 수 있습니다.</p>
+    <p><b>테이크아웃 동선은 밤에 진가가 나옵니다.</b> 문 앞 술자리 손님의 상당수는 앉지 않고 들고 갑니다.
+    포장 손님이 홀 손님과 안 섞이게만 해도 밤 시간 회전이 달라집니다.</p>
+    <p><b>3D 화면은 결정용이 아니라 안심용으로 쓰시길.</b> 공사 전에 "이렇게 되는구나"를 눈으로 보면
+    결정이 훨씬 가볍습니다. 배치안을 고르실 때 숫자(예상 매출)와 그림(3D)을 같이 놓고 보시면 됩니다.</p>
+    <p class="disclaim">이 의견은 마케팅·PM 분석 틀에 이 프로젝트의 실측 데이터를 넣어 나온 참고 의견입니다. 따르셔도 되고 안 따르셔도 됩니다 — 판단은 대표님들 몫입니다.</p>
+  </div>
+</details>
+
+<footer>
+  <p>배치 원칙 원본: <code>04-space/인테리어_허브반영용.md</code> · 동선 산출물 계획: <code>01-research/상권조사_마케팅로드맵.md</code> 13장 · 이 페이지는 평면도 수령 후 인테리어 창이 채웁니다</p>
+</footer>
+
+</div>
+</main>
+</div>
+<script src="assets/lightbox.js?v=2" defer></script>
+<script src="assets/mobile-table.js?v=1" defer></script>
+</body>
+</html>

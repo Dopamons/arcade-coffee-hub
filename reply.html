@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>아케이드커피 — 리뷰 답글 도구</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=8">
+<style>
+  .rp{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh-1);margin:12px 0;overflow:hidden}
+  .rp .hd{padding:14px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;align-items:baseline;flex-wrap:wrap}
+  .rp .hd b{font-size:17.5px}
+  .rp .ex{font-size:14px;color:var(--sub);padding:10px 18px;background:#f7f7f4;border-bottom:1px solid var(--line);line-height:1.6}
+  .tpl{position:relative;padding:14px 18px 14px;border-bottom:1px dashed var(--line)}
+  .tpl:last-child{border-bottom:0}
+  .tpl p{margin:0 96px 0 0;font-size:16px;line-height:1.75}
+  .tpl .cond{display:inline-block;background:var(--warn-tint);color:var(--warn);font-size:12.5px;font-weight:700;border-radius:5px;padding:1px 8px;margin-bottom:6px}
+  .copy{position:absolute;right:14px;top:12px;background:var(--ink);color:#f0cd85;border:0;border-radius:8px;
+    padding:8px 14px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit}
+  .copy:hover{background:#000}
+  .copy.done{background:var(--ok);color:#fff}
+  .rules{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+  @media (max-width:980px){.rules{grid-template-columns:1fr}.tpl p{margin-right:0;margin-bottom:38px}}
+</style>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>">
+</head>
+<body>
+<div class="app">
+
+<aside class="side">
+  <div>
+    <div class="mark"><img src="assets/logo.png?v=1" alt="ARCADE COFFEE" onload="this.parentNode.classList.add('has-logo')" onerror="this.remove()"><span class="mark-txt">ARCADE<br>COFFEE</span></div>
+    <h1>1층 재오픈<br>프로젝트 허브</h1>
+    <p class="meta">사용자: 최규민 매니저<br>문안 원본: 마케팅 창 톤가이드</p>
+  </div>
+  <nav>
+    <a href="index.html"><i>00</i><span>전체 요약</span></a>
+    <a href="market.html"><i>01</i><span>시장조사</span></a>
+    <a href="menu.html"><i>02</i><span>시그니처 메뉴</span></a>
+    <a href="space.html"><i>03</i><span>공간·1층 단장</span></a>
+    <a href="layout.html"><i>3-1</i><span>동선·가구 배치</span></a>
+    <a href="procure.html"><i>3-2</i><span>가구·조명 조달</span></a>
+    <a href="marketing.html"><i>04</i><span>마케팅·리뷰</span></a>
+    <a href="ops.html"><i>05</i><span>운영·업무 분담</span></a>
+    <a href="outlook.html"><i>06</i><span>전망·리스크와 기회</span></a>
+    <a href="reply.html" class="on"><i>07</i><span>리뷰 답글 도구</span></a>
+  </nav>
+  <div class="foot">내부 도구 · 외부 공개 아님<br>문안 갱신은 마케팅 창 → 톤가이드 수정 후 이 페이지 반영</div>
+</aside>
+
+<main class="main">
+
+<div class="hero">
+  <div class="inner">
+    <span class="eyebrow">07 리뷰 답글 도구</span>
+    <h2>답글 문안 복사 도구</h2>
+    <p>리뷰 유형을 찾아 "복사" 버튼을 누르고, 네이버 답글창에 붙여넣은 뒤 <b>손님이 쓴 단어 하나를 반드시 바꿔 넣습니다.</b>
+    그대로 올리면 복붙 답글로 보입니다 — 단어 교체가 이 도구 사용법의 전부입니다.</p>
+  </div>
+</div>
+
+<div class="inner">
+
+<section id="rules">
+  <div class="sec-h"><span class="no">1</span><div>
+    <h3>붙여넣기 전 4가지 규칙</h3>
+    <p class="sub">근거·전체 문안: 06-marketing/리뷰답글_톤가이드.md</p>
+  </div></div>
+  <div class="rule"></div>
+  <div class="rules">
+    <div class="note good">
+      <b>할 것</b>
+      ① 손님이 쓴 단어 하나를 답글에 그대로 넣기 (예: "산미", "테라스")
+      ② 3~4문장, 리뷰보다 길게 쓰지 않기
+      ③ 불만에는 "언제까지 무엇을" 넣기
+      ④ 하루 5개, 주 3회 속도 지키기 — 한 번에 몰아 쓰면 자동 답글로 보입니다
+    </div>
+    <div class="note flag">
+      <b>하지 말 것</b>
+      이모지 · "소중한 의견 감사합니다" 상투구 · 같은 문장 재사용 · 변명 ·
+      불만 답글 끝에 메뉴 홍보 · 재오픈 예고는 3개 중 1개까지만
+    </div>
+  </div>
+</section>
+
+<section id="tpls">
+  <div class="sec-h"><span class="no">2</span><div>
+    <h3>유형별 문안 — 복사해서 쓰기</h3>
+    <p class="sub">노란 표시가 붙은 문안은 조건이 맞을 때만 씁니다</p>
+  </div></div>
+  <div class="rule"></div>
+
+  <div class="rp">
+    <div class="hd"><b>유형 1 · 길게 쓴 호평</b><span class="muted">언급한 것 2개를 이름 불러주기</span></div>
+    <div class="ex">이런 리뷰에: "산미 강하지 않아 마음에 딱" / "현대미술관처럼" 같은 장문 호평</div>
+    <div class="tpl"><p>산미가 강하지 않아 마음에 드셨다니 다행입니다. 저희가 가장 신경 쓰는 부분이라 이런 말씀이 제일 반갑습니다. 테라스는 요즘 저녁에 앉기가 좋아졌는데, 다음에 오시면 그쪽도 한번 앉아보세요. 긴 후기 남겨주셔서 감사합니다.</p><button class="copy">복사</button></div>
+    <div class="tpl"><p>이렇게 자세히 적어주시니 저희가 뭘 잘하고 있는지 알겠습니다. 말차 이야기를 하셔서 말씀드리면, 말차 쪽은 앞으로 조금 더 늘려볼 생각입니다. 다음에 오실 때쯤이면 1층도 카페로 다시 열려 있을 겁니다. 그때 또 뵙겠습니다.</p><button class="copy">복사</button></div>
+  </div>
+
+  <div class="rp">
+    <div class="hd"><b>유형 2 · 짧은 호평</b><span class="muted">2문장 + 검색 단어 하나 심기</span></div>
+    <div class="ex">이런 리뷰에: "커피가 맛있어요" / "좋아요" / "직원분들 친절해여"</div>
+    <div class="tpl"><p>맛있게 드셨다니 좋습니다. 늦은 시간까지 열어두고 있으니 편할 때 또 오세요.</p><button class="copy">복사</button></div>
+    <div class="tpl"><p>감사합니다. 디카페인 아메리카노도 있어서 저녁 늦게 오셔도 부담 없습니다.</p><button class="copy">복사</button></div>
+  </div>
+
+  <div class="rp">
+    <div class="hd"><b>유형 3 · 양이 적다 · 잔이 작다</b><span class="muted">이유 설명으로 시작하지 않기</span></div>
+    <div class="ex">이런 리뷰에: "얼음포함컵이 손바닥만해요" / "3모금 먹으니까 끝남"</div>
+    <div class="tpl"><span class="cond">잔 크기 개선 확정 전 — 지금 쓰는 문안</span><p>잔이 작다는 말씀이 맞습니다. 얼음을 넣으면 실제로 마시는 양이 줄어드는데 그동안 그대로 뒀습니다. 잔 크기를 올리는 작업을 하고 있고, 늦어도 10월 재오픈 때는 바뀐 잔으로 드립니다. 그때 다시 확인해 주시면 좋겠습니다.</p><button class="copy">복사</button></div>
+    <div class="tpl"><span class="cond">잔 크기 개선이 실제 완료된 뒤에만</span><p>잔이 작다는 지적을 여러 번 받아서 지난달부터 잔을 키웠습니다. 얼음 양도 줄였습니다. 가격은 그대로입니다. 다시 오시면 차이가 느껴지실 겁니다.</p><button class="copy">복사</button></div>
+  </div>
+
+  <div class="rp">
+    <div class="hd"><b>유형 4 · 의자·좌석 불만</b><span class="muted">과거 좌석 얘기(온돌 등)는 꺼내지 않기</span></div>
+    <div class="ex">이런 리뷰에: "돌의자 딱딱" / "등받이가 없는 의자라 오래 앉아있기 힘들고" / "방석이라도 있다면"</div>
+    <div class="tpl"><p>오래 앉아 계시기 불편했다면 저희 잘못입니다. 좌석은 10월에 1층을 카페로 다시 열면서 같이 바꿉니다. 오래 앉아 있어도 괜찮은 자리를 만드는 게 이번에 가장 중요한 목표입니다. 불편하게 드시게 해서 죄송합니다.</p><button class="copy">복사</button></div>
+    <div class="tpl"><span class="cond">방석을 실제로 놓은 뒤에만</span><p>딱딱하고 차갑다는 말씀 여러 번 들었습니다. 우선 방석을 두었으니 필요하시면 말씀해 주세요. 좌석 자체는 10월 재오픈 때 바꿉니다.</p><button class="copy">복사</button></div>
+  </div>
+
+  <div class="rp">
+    <div class="hd"><b>유형 5 · 디저트 품질 불만</b><span class="muted">"그날 기준에 못 미쳤다"가 "죄송합니다"보다 강함</span></div>
+    <div class="ex">이런 리뷰에: "공장용 생크림 맛" / "퍽퍽하고 가격에 비해 아쉬움"</div>
+    <div class="tpl"><p>드신 날 상태가 저희 기준에 못 미쳤던 것 같습니다. 같은 메뉴를 두고 평이 갈리는 걸 저희도 보고 있어서, 만드는 기준을 다시 정리하는 중입니다. 불편하게 드시게 해서 죄송합니다.</p><button class="copy">복사</button></div>
+    <div class="tpl"><p>티라미수는 저희도 다시 손보고 있는 메뉴입니다. 잘 나온 날과 그렇지 않은 날의 차이를 없애는 게 먼저라고 보고 있습니다. 시간을 들여 적어주셔서 감사합니다.</p><button class="copy">복사</button></div>
+    <div class="tpl"><span class="cond">위생 관련 리뷰 — 조치를 실제로 한 뒤, 조치 내용을 확인해서 쓰기. 임의로 올리지 말 것</span><p>드시다 버리고 나가셨다는 건 저희가 완전히 잘못한 겁니다. 이제야 답글을 남기는 것도 죄송합니다. (실제로 취한 조치를 여기에 씁니다.) 다시 낼 때는 재료 보관과 기계 관리 기준을 먼저 세우고 내겠습니다.</p><button class="copy">복사</button></div>
+  </div>
+
+  <div class="rp">
+    <div class="hd"><b>유형 6 · 응대 불만</b><span class="muted">반박 금지 — 확인하겠다고만</span></div>
+    <div class="ex">이런 리뷰에: "진짜 불친절하시네요" — 답글이 가장 필요한 유형입니다</div>
+    <div class="tpl"><p>불편하게 응대받으셨다면 변명할 게 없습니다. 그날 어떤 상황이었는지 저희 쪽에서 다시 확인해 보겠습니다. 응대 기준을 정리해서 직원들과 같이 맞추겠습니다. 죄송합니다.</p><button class="copy">복사</button></div>
+  </div>
+
+  <div class="rp">
+    <div class="hd"><b>유형 7 · 주차 불만</b><span class="muted">가까운 공영주차장 안내 포함</span></div>
+    <div class="ex">이런 리뷰에: "주차가 3대만 가능하여 어렵지만"</div>
+    <div class="tpl"><p>주차가 3~4대뿐인데 안내에는 무료주차로만 되어 있어서 오해를 드렸습니다. 표기를 고쳤습니다. 자리가 없을 때는 걸어서 3분 거리에 노상공영주차장(봉명동 572)이 있어서 그쪽을 안내하고 있습니다. 미리 알려드리지 못해 죄송합니다.</p><button class="copy">복사</button></div>
+  </div>
+
+  <div class="rp">
+    <div class="hd"><b>유형 8 · 음악·소음</b><span class="muted">볼륨을 실제로 낮춘 뒤에 달기</span></div>
+    <div class="ex">이런 리뷰에: "음악소리가 너무 커서 대화를 제대로 할 수 없었어요"</div>
+    <div class="tpl"><p>음악이 커서 대화가 어려우셨다면 그건 바로 고칠 수 있는 부분입니다. 볼륨 기준을 정해서 낮췄고, 스피커도 한 곳에서 크게 트는 대신 여러 곳으로 나눠 놓았습니다.</p><button class="copy">복사</button></div>
+  </div>
+
+  <div class="rp">
+    <div class="hd"><b>단골 리뷰어</b><span class="muted">멋쟁이기독교인(5회 재방문) 등 — 재오픈 소식을 넣는 유일한 예외</span></div>
+    <div class="ex">대상 명단은 톤가이드 4장: 감사부장 · 오감자의 한입 기록 · 미닌데요 · 먹어보작 · 대전푸드파이터 · 대전맛잘알ON · 그레나</div>
+    <div class="tpl"><p>여러 번 오시는 걸 저희도 알고 있습니다. 늘 감사합니다. 10월에 1층까지 카페로 다시 여는데, 좌석이랑 잔 크기까지 손보고 있으니 열면 제일 먼저 와서 보시고 아니다 싶은 게 있으면 말씀해 주세요.</p><button class="copy">복사</button></div>
+  </div>
+</section>
+
+<section id="order">
+  <div class="sec-h"><span class="no">3</span><div>
+    <h3>답글 다는 순서</h3>
+    <p class="sub">하루 5개 · 주 3회 · 2주면 밀린 것이 끝납니다</p>
+  </div></div>
+  <div class="rule"></div>
+  <ul class="tight">
+    <li><b>1순위</b> — 2026년 리뷰 전부 (최근 것부터 거꾸로)</li>
+    <li><b>2순위</b> — 부정 리뷰 전부 (연도 무관. 지울 수는 없지만 답글로 덮습니다)</li>
+    <li><b>3순위</b> — 2025년 9월 이후의 나머지 호평</li>
+    <li><b>4순위</b> — 단골 리뷰어 명단 (재오픈 알림 겸)</li>
+  </ul>
+</section>
+
+<footer>
+  <p>문안 원본·근거: <code>06-marketing/리뷰답글_톤가이드.md</code> · 갱신은 마케팅 창이 톤가이드를 고친 뒤 이 페이지에 반영 · 이 페이지 편집: <code>hub/reply.html</code></p>
+</footer>
+
+</div>
+</main>
+</div>
+
+<script>
+// 복사 버튼 — 문안만 복사되고, 조건 라벨은 복사되지 않는다
+document.querySelectorAll(".copy").forEach(function (btn) {
+  btn.addEventListener("click", function () {
+    var text = btn.parentElement.querySelector("p").innerText;
+    function ok() {
+      btn.textContent = "복사됨";
+      btn.classList.add("done");
+      setTimeout(function () { btn.textContent = "복사"; btn.classList.remove("done"); }, 1800);
+    }
+    function fallback() {
+      var ta = document.createElement("textarea");
+      ta.value = text; document.body.appendChild(ta); ta.select();
+      document.execCommand("copy"); document.body.removeChild(ta); ok();
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(ok).catch(fallback);
+    } else {
+      var ta = document.createElement("textarea");
+      ta.value = text; document.body.appendChild(ta); ta.select();
+      document.execCommand("copy"); document.body.removeChild(ta); ok();
+    }
+  });
+});
+</script>
+<script src="assets/mobile-table.js?v=1" defer></script>
+</body>
+</html>

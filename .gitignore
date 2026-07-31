@@ -1,0 +1,7 @@
+# 원본 고해상도 사진 — 웹에 올리지 않습니다
+assets/_original/
+
+# OS
+Thumbs.db
+.DS_Store
+desktop.ini
