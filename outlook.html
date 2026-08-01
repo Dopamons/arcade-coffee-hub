@@ -16,6 +16,33 @@
   tr.r-low{background:var(--ok-tint)}
   .lg{display:flex;gap:16px;font-size:14px;color:var(--sub);margin:8px 0 0;flex-wrap:wrap}
   .lg i{width:13px;height:13px;border-radius:3px;display:inline-block;margin-right:5px;vertical-align:-1px}
+  /* 세 가지 경우 — 표 대신 카드 세 장 */
+  .scens{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:16px 0 4px}
+  .scen{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+    box-shadow:var(--sh-1);padding:16px 18px 18px;border-top:4px solid var(--line-2)}
+  .scen.s-mid{border-top-color:var(--amber)}
+  .scen.s-up{border-top-color:var(--ok)}
+  .scen.s-dn{border-top-color:var(--stop)}
+  .scen .tag{display:inline-block;font-size:13px;font-weight:800;letter-spacing:-.02em;
+    padding:3px 10px;border-radius:99px;background:var(--paper);color:var(--sub)}
+  .scen.s-mid .tag{background:var(--brass-tint);color:var(--brass)}
+  .scen.s-up .tag{background:var(--ok-tint);color:#2f6b3a}
+  .scen.s-dn .tag{background:var(--stop-tint);color:#a3341f}
+  .scen .cond{margin:11px 0 0;font-size:15.5px;line-height:1.6;font-weight:700}
+  .scen .big{font-family:var(--mono);font-size:27px;font-weight:800;letter-spacing:-.03em;margin:12px 0 2px}
+  .scen .big small{font-size:15px;font-weight:700}
+  .scen .bsub{font-size:13.5px;color:var(--sub);margin-bottom:12px}
+  .scen ul{margin:0;padding-left:17px}
+  .scen li{font-size:14.5px;line-height:1.62;margin-bottom:6px}
+  .scen .why{margin:12px 0 0;padding-top:11px;border-top:1px dashed var(--line);
+    font-size:13.5px;color:var(--sub);line-height:1.6}
+  @media (max-width:980px){.scens{grid-template-columns:1fr}}
+  @media (max-width:560px){
+    .scen .cond{font-size:17px}
+    .scen .big{font-size:30px}
+    .scen li{font-size:16.5px;line-height:1.7}
+    .scen .why{font-size:15.5px}
+  }
 </style>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>">
 </head>
@@ -72,38 +99,60 @@
     비교 대상은 중도일보가 2025년에 낸 유성구 상권분석 자료입니다.
   </div>
 
-  <div class="tw"><table>
-    <thead><tr><th style="width:22%"></th><th>보통일 때</th><th>잘 될 때</th><th>안 될 때</th></tr></thead>
-    <tbody>
-      <tr><td><b>무엇을 했나</b></td>
-      <td>리뷰 답글을 다시 하고, 잔을 키우고, 의자를 바꿉니다</td>
-      <td>위에 더해서 금·토를 늦게까지 열고, 블로그 체험단을 매달 꾸준히 돌립니다</td>
-      <td>답글도 홍보도 다시 시작하지 못합니다</td></tr>
+  <p><b>세 가지는 운으로 갈리지 않습니다. 무엇을 하느냐로 갈립니다.</b>
+  아래 카드는 위에서부터 <b>"이렇게 하면 → 이렇게 됩니다"</b> 순서로 읽으시면 됩니다.</p>
 
-      <tr><td><b>월 매출</b></td>
-      <td>유성구 카페 평균인 <b>월 1,209만원</b> 언저리</td>
-      <td>노은3동 카페 수준인 <b>월 1,571만원</b> 언저리</td>
-      <td>평균에 못 미침</td></tr>
+  <div class="scens">
+    <div class="scen s-mid">
+      <span class="tag">보통일 때 · 기준</span>
+      <p class="cond">리뷰 답글을 다시 하고, 잔을 키우고, 의자를 바꾸면</p>
+      <div class="big">월 1,209<small>만원</small></div>
+      <div class="bsub">유성구 카페 평균만큼</div>
+      <ul>
+        <li>손님 한 명이 <b>12,000원</b>을 씁니다<br>
+        <span class="muted">지금 동네 평균은 8,570원 — 음료 한 잔 더, 디저트 하나 더</span></li>
+        <li>"봉명동카페"로 검색하면 <b>1~2위</b><br>
+        <span class="muted">작년 5월까지 우리가 있던 자리입니다</span></li>
+      </ul>
+      <p class="why"><b>왜 여기까지는 간다고 보나</b><br>
+      리뷰 1,276건에 별점 4.51입니다. 이미 손님이 좋게 평가해 둔 가게라, 다시 보이기만 하면 평균은 갑니다.</p>
+    </div>
 
-      <tr><td><b>손님 한 명이 쓰는 돈</b></td>
-      <td>지금 동네 평균이 8,570원입니다. <b>12,000원</b>이 목표입니다 — 음료 한 잔 더, 디저트 하나 더</td>
-      <td>12,000원에 밤 시간대 매출이 얹힙니다</td>
-      <td>5,000원대에 머무름 — 아메리카노만 팔리는 상태</td></tr>
+    <div class="scen s-up">
+      <span class="tag">잘 될 때</span>
+      <p class="cond">여기에 더해서 금·토를 늦게까지 열고, 블로그 체험단을 매달 꾸준히 돌리면</p>
+      <div class="big">월 1,571<small>만원</small></div>
+      <div class="bsub">노은3동 수준 — 유성구에서 카페 매출이 가장 높은 동네</div>
+      <ul>
+        <li>12,000원에 <b>밤 시간대 매출</b>이 얹힙니다</li>
+        <li>"대전대형카페"로도 위쪽에 고정<br>
+        <span class="muted">이 말은 "봉명동카페"보다 3배 많이 검색됩니다</span></li>
+      </ul>
+      <p class="why"><b>왜 가능하다고 보나</b><br>
+      문 앞 100m 음식점의 절반 이상이 술집입니다. 그 손님들이 2차로 갈 자리가 지금 이 동네에 없습니다.</p>
+    </div>
 
-      <tr><td><b>네이버에서 찾아지나</b></td>
-      <td>"봉명동카페"로 검색했을 때 <b>1~2위</b>로 돌아옵니다 (작년 5월에 있던 자리입니다)</td>
-      <td>"대전대형카페"로도 위쪽에 고정됩니다 — 이 말은 봉명동카페보다 3배 많이 검색됩니다</td>
-      <td>가게 이름을 아는 사람만 찾아옵니다</td></tr>
+    <div class="scen s-dn">
+      <span class="tag">안 될 때</span>
+      <p class="cond">답글도 홍보도 다시 시작하지 못하면</p>
+      <div class="big">평균 <small>아래</small></div>
+      <div class="bsub">1,209만원에 못 미칩니다</div>
+      <ul>
+        <li>손님 한 명이 <b>5,000원대</b>에 머무릅니다<br>
+        <span class="muted">아메리카노만 팔리는 상태</span></li>
+        <li>가게 <b>이름을 아는 사람만</b> 찾아옵니다</li>
+      </ul>
+      <p class="why"><b>왜 그렇게 되나</b><br>
+      르뺑·에이트는 계속 글을 올리는데 우리만 멈춰 있으면, 검색에서 자리를 계속 내주게 됩니다.</p>
+    </div>
+  </div>
 
-      <tr><td><b>이렇게 볼 근거</b></td>
-      <td>리뷰 1,276건에 별점 4.51 — 이미 손님이 좋게 평가한 가게입니다</td>
-      <td>문 앞 100m 음식점의 절반 이상이 술집입니다. 그 사람들이 2차로 올 자리가 없습니다</td>
-      <td>르뺑·에이트는 계속 글을 올리는데 우리만 멈춘 상태가 이어집니다</td></tr>
-    </tbody>
-    <caption><b>세 갈래를 가르는 것은 공사도 메뉴도 아닙니다. 리뷰 답글과 홍보를 다시 시작하느냐입니다.</b>
-    작년에 비해 검색으로 들어오는 사람이 38% 줄었는데, 이걸 되돌리지 못하면 1층을 아무리 잘 고쳐도 사람이 오지 않습니다.
-    답글은 하루 30분이면 되고 돈이 들지 않습니다.</caption>
-  </table></div>
+  <div class="note good">
+    <b>세 갈래를 가르는 것은 공사도 메뉴도 아닙니다</b>
+    <b>리뷰 답글과 홍보를 다시 시작하느냐입니다.</b> 작년에 비해 검색으로 들어오는 사람이 38% 줄었는데,
+    이걸 되돌리지 못하면 1층을 아무리 잘 고쳐도 사람이 오지 않습니다.
+    답글은 하루 30분이면 되고 돈이 들지 않습니다.
+  </div>
 </section>
 
 <section id="opp">
