@@ -67,50 +67,36 @@
 })();
 
 /* 좁은 화면에서 상단 메뉴 다루기
-   - 지금 보고 있는 장이 화면 밖에 있으면 가운데로 끌어옵니다
-   - 아래로 내리면 메뉴가 화면 맨 위에 붙어 따라옵니다 (어디서든 다른 장으로 바로 이동) */
+   - 로고·제목이 위로 빠져나가고 메뉴 줄만 화면 맨 위에 남도록,
+     사이드바를 "브랜드 블록 높이만큼 위로" 붙여 둡니다 (CSS sticky + 음수 top)
+   - 지금 보고 있는 장이 메뉴에서 안 보이면 가운데로 끌어옵니다 */
 (function () {
-  var nav = null, anchor = 0, fixed = false;
-
-  function centerActive() {
-    if (!nav || nav.scrollWidth <= nav.clientWidth + 4) return;
-    var on = nav.querySelector('a.on');
-    if (!on) return;
-    var target = on.offsetLeft - (nav.clientWidth - on.offsetWidth) / 2;
-    nav.scrollTo({ left: Math.max(0, target), behavior: 'auto' });
-  }
-
-  function measure() {
-    if (!nav) return;
-    if (fixed) return;                       // 붙어 있을 때는 기준점을 다시 재지 않는다
-    anchor = nav.getBoundingClientRect().top + window.scrollY;
+  function setHeights() {
+    var side = document.querySelector('.side');
+    var nav = document.querySelector('.side nav');
+    if (!side || !nav) return;
+    var brand = side.firstElementChild;                 // 로고 + 제목 블록
+    var h = brand ? brand.offsetHeight : 0;
+    var cs = getComputedStyle(side);
+    var top = parseFloat(cs.paddingTop) || 0;
+    var gap = parseFloat(cs.rowGap || cs.gap) || 0;
+    document.documentElement.style.setProperty('--brandh', (h + top + gap) + 'px');
     document.documentElement.style.setProperty('--navh', nav.offsetHeight + 'px');
   }
 
-  function onScroll() {
-    if (!nav || window.innerWidth > 980) {
-      if (fixed) { document.body.classList.remove('navfix'); fixed = false; }
-      return;
-    }
-    var should = window.scrollY > anchor;
-    if (should !== fixed) {
-      fixed = should;
-      document.body.classList.toggle('navfix', fixed);
-      if (!fixed) measure();
-    }
+  function centerActive() {
+    var nav = document.querySelector('.side nav');
+    if (!nav || nav.scrollWidth <= nav.clientWidth + 4) return;
+    var on = nav.querySelector('a.on');
+    if (!on) return;
+    nav.scrollTo({ left: Math.max(0, on.offsetLeft - (nav.clientWidth - on.offsetWidth) / 2), behavior: 'auto' });
   }
 
   function init() {
-    nav = document.querySelector('.side nav');
-    if (!nav) return;
-    measure();
+    setHeights();
     centerActive();
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', function () {
-      document.body.classList.remove('navfix'); fixed = false;
-      measure(); centerActive(); onScroll();
-    });
+    window.addEventListener('resize', function () { setHeights(); centerActive(); });
+    window.addEventListener('load', setHeights);
   }
 
   if (document.readyState === 'loading') {
