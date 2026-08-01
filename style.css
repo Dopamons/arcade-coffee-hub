@@ -104,13 +104,32 @@ td .thumb,.shots img{cursor:zoom-in}
 .lb img{max-width:82vw;max-height:82vh;border-radius:10px;box-shadow:0 22px 60px rgba(0,0,0,.55);background:#fff}
 .lb figcaption{color:#e9e9e7;font-size:14.5px;display:flex;gap:12px;align-items:baseline}
 .lb .lb-cnt{color:#9d9d9a;font-size:13px}
-.lb-nav{flex:0 0 auto;width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.28);
-  background:rgba(255,255,255,.1);color:#fff;font-size:26px;line-height:1;cursor:pointer}
-.lb-nav:hover{background:rgba(255,255,255,.2)}
-.lb-x{position:absolute;top:16px;right:18px;border:1px solid rgba(255,255,255,.28);
-  background:rgba(255,255,255,.1);color:#fff;font-size:13.5px;padding:7px 14px;border-radius:999px;cursor:pointer}
-.lb-x:hover{background:rgba(255,255,255,.2)}
-@media (max-width:560px){.lb img{max-width:92vw}.lb-nav{width:38px;height:38px;font-size:22px}}
+/* 좌우 넘김 버튼 — 어두운 배경에서도 확실히 보이게 흰 원으로 */
+.lb-nav{flex:0 0 auto;width:56px;height:56px;border-radius:50%;border:0;
+  background:#fff;color:#1a1a1a;font-size:30px;line-height:1;cursor:pointer;
+  box-shadow:0 6px 22px rgba(0,0,0,.5);transition:transform .12s ease}
+.lb-nav:hover{background:#fff;transform:scale(1.06)}
+.lb-nav:active{transform:scale(.96)}
+.lb-x{position:absolute;top:16px;right:18px;border:0;
+  background:#fff;color:#1a1a1a;font-size:14.5px;font-weight:700;
+  padding:9px 18px;border-radius:999px;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.45)}
+.lb-x:hover{background:#f2f2ef}
+.lb figcaption{color:#fff;font-size:16px;font-weight:600}
+.lb .lb-cnt{color:#c9c9c5;font-size:14.5px;font-family:var(--mono)}
+
+/* 폰 — 버튼을 아래쪽 가운데로 모아 엄지로 누르기 쉽게 */
+@media (max-width:700px){
+  .lb{flex-wrap:wrap;align-content:center;padding:14px 10px 96px}
+  .lb .lb-fig{order:1;flex:1 0 100%;max-height:74vh}
+  .lb img{max-width:94vw;max-height:64vh}
+  .lb-prev{order:2}
+  .lb-next{order:3}
+  .lb-nav{position:fixed;bottom:22px;width:62px;height:62px;font-size:34px}
+  .lb-prev{left:calc(50% - 86px)}
+  .lb-next{left:calc(50% + 24px)}
+  .lb-x{top:14px;right:14px;padding:11px 20px;font-size:15.5px}
+  .lb figcaption{flex-direction:column;gap:4px;text-align:center}
+}
 .bdg.out{background:var(--stop-tint);color:var(--stop);border-color:#eecbc6}
 .bdg.chk{background:#edeef0;color:var(--ink-2);border-color:#dcdee1}
 .bdg-legend{display:flex;flex-wrap:wrap;gap:10px 16px;margin:14px 0 2px;font-size:13.5px;color:var(--ink-2)}
