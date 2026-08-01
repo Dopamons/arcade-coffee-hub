@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex, nofollow">
 <title>아케이드커피 — 정산 시스템</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=28">
+<link rel="stylesheet" href="style.css?v=29">
 <style>
   .calc{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
     box-shadow:var(--sh-1);padding:18px 20px;margin:16px 0}
@@ -21,24 +21,14 @@
     border:1px solid var(--line-2);border-radius:var(--r);background:#fff;color:var(--ink)}
   .warn{color:#a3341f;font-weight:800}
   .ok2{color:#2f6b3a;font-weight:800}
+  .use{display:block;font-size:13px;color:var(--sub);font-weight:400;margin-top:3px}
   td.edit input{width:82px;padding:6px 8px;font-size:16px;font-family:var(--mono);text-align:right;
     border:1px solid var(--line-2);border-radius:var(--r);background:#fff;color:var(--ink)}
-  .pl{width:100%;border-collapse:collapse}
-  .pl td{padding:9px 4px;border-bottom:1px solid var(--line)}
-  .pl td:last-child{text-align:right;font-family:var(--mono);font-size:17px;white-space:nowrap}
-  .pl tr.sum td{border-top:2px solid var(--ink-2);border-bottom:0;font-weight:800;font-size:17px}
-  .pl tr.final td{background:var(--brass-tint);font-weight:800;font-size:18px}
-  .pl .minus td:last-child{color:#a3341f}
   @media (max-width:560px){
     .knobs{grid-template-columns:1fr;gap:11px}
     .knob input{font-size:19px}
     td.edit input{width:96px;font-size:17px}
-    /* 손익표는 폰에서도 두 칸 그대로 — 항목과 금액이 한 줄에 있어야 읽힙니다 */
-    .pl{display:table;width:100%}
-    .pl tbody{display:table-row-group}
-    .pl tr{display:table-row}
-    .pl td{display:table-cell;padding:11px 2px;font-size:16px}
-    .pl td:last-child{font-size:16.5px}
+    .use{font-size:14.5px}
   }
 </style>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>">
@@ -73,17 +63,101 @@
 <div class="hero">
   <div class="inner">
     <span class="eyebrow">07 정산 시스템</span>
-    <h2>정산 시스템 설계 · 2026년 10월 가동 목표</h2>
-    <p>지금은 잔당 재료비까지만 알고, 한 달에 얼마가 남는지는 모릅니다. 그 사이를 메우는 것이 정산 시스템입니다.
-    아래 5장과 6장은 <b>실제로 숫자를 넣어 볼 수 있습니다</b> — 완성되면 이 화면이 관리자 화면에서 그대로 돌아갑니다.
-    입력한 값은 이 화면에서만 계산되고 어디에도 저장되지 않습니다.</p>
+    <h2>원가 계산기와 정산 시스템 소개</h2>
+    <p>지금은 잔당 재료비를 물어보면 종이에 다시 계산해야 합니다. 아래 계산기는 그 일을 대신합니다 —
+    <b>재료 단가를 한 번 고치면 열두 메뉴가 즉시 다시 계산됩니다.</b>
+    정산 시스템은 이런 계산을 매출·매입 자료까지 붙여서 자동으로 돌리는 것입니다. 2장부터가 그 소개입니다.</p>
   </div>
 </div>
 
 <div class="inner">
 
-<section id="why">
+<section id="calc">
   <div class="sec-h"><span class="no">1</span><div>
+    <h3>원가 계산기 — 지금 쓰시는 메뉴</h3>
+    <p class="sub">네이버 플레이스에 등록된 아케이드커피 메뉴 12가지 · 숫자를 고치면 즉시 다시 계산됩니다</p>
+  </div></div>
+  <div class="rule"></div>
+
+  <div class="calc">
+    <h4>재료 단가</h4>
+    <p class="muted" style="margin:0">이 세 가지가 재료비의 대부분을 움직입니다. 값을 고쳐 보십시오.</p>
+    <div class="knobs">
+      <div class="knob"><label>원두</label><input id="k-bean" type="number" step="500" value="22000"><span class="u">원 / 1kg · 1샷 20g</span></div>
+      <div class="knob"><label>우유</label><input id="k-milk" type="number" step="100" value="2700"><span class="u">원 / 1L</span></div>
+      <div class="knob"><label>생크림</label><input id="k-cream" type="number" step="100" value="8000"><span class="u">원 / 1L</span></div>
+    </div>
+    <button class="reset" id="k-reset">기본값으로 되돌리기</button>
+  </div>
+
+  <div class="tw wrapn"><table id="cost-table">
+    <thead><tr>
+      <th style="width:27%">메뉴</th><th class="n" style="width:13%">판매가</th>
+      <th class="n" style="width:12%">원두</th><th class="n" style="width:13%">우유·크림</th>
+      <th class="n" style="width:12%">그 밖</th><th class="n" style="width:11%">재료비</th>
+      <th class="n" style="width:10%">원가율</th><th class="n" style="width:12%">한 잔 남는 돈</th>
+    </tr></thead>
+    <tbody></tbody>
+    <caption><b>판매가 칸도 고칠 수 있습니다.</b> 값을 넣으면 원가율이 바로 바뀝니다 —
+    "얼마를 받으면 원가율이 몇 퍼센트인가"를 그 자리에서 봅니다.
+    원가율이 <b>30%를 넘으면 붉게</b> 표시됩니다(카페 음료에서 흔히 쓰는 상한선).
+    메뉴명 아래 작은 글씨가 계산에 쓴 사용량입니다.</caption>
+  </table></div>
+
+  <div class="note flag">
+    <b>이 숫자의 한계 — 먼저 읽어 주십시오</b>
+    <b>원두 · 우유 · 생크림</b>만 조회가 기준입니다(네이버쇼핑 2026-07-30, <code>data/ingredient-prices-20260730.csv</code>).
+    <b>티백 · 청 · 주스 · 부자재 단가와 메뉴별 사용량은 아직 추정입니다.</b>
+    실제 레시피를 재 보고 도매 견적을 받으면 그때 확정합니다. 지금은 <b>메뉴끼리 비교하는 용도</b>로만 보시는 것이 맞습니다.
+    캐리비안 칵테일은 배합을 몰라 특히 불확실합니다.
+  </div>
+
+  <div class="note why">
+    <b>계산기를 돌려 보니 나온 것</b>
+    우유가 들어가는 커피 세 가지가 상한선 위에 있습니다 — <b>바닐라 라떼 38.2% · 라떼 37.1% · 딥블랙 34.2%</b>.
+    반대로 티 계열(루이보스 바닐라 · 로얄 캐모마일 21.1%)과 에스프레소(18.7%)는 낮습니다.
+    <b>메뉴판에서 어느 것이 팔려야 남는지가 여기서 갈립니다.</b>
+    다만 위 한계대로 사용량이 추정이라, 실제 레시피를 재 본 뒤에 판단하는 것이 맞습니다.
+  </div>
+</section>
+
+<section id="auto">
+  <div class="sec-h"><span class="no">2</span><div>
+    <h3>사람이 하던 일 중 무엇이 자동으로 되나</h3>
+    <p class="sub">정산 시스템의 값어치는 새 기능이 아니라, 지금 안 하고 있는 계산을 대신 해 준다는 데 있습니다</p>
+  </div></div>
+  <div class="rule"></div>
+
+  <div class="tw wrapn"><table>
+    <thead><tr><th style="width:30%">일</th><th style="width:35%">지금 (사람이)</th><th>시스템이 있으면</th></tr></thead>
+    <tbody>
+      <tr class="us"><td><b>재료값이 올랐을 때 메뉴별 원가 다시 계산</b></td>
+      <td>메뉴 12개를 하나씩 다시 계산. 30분 넘게 걸려서 <b>사실상 안 하게 됩니다</b></td>
+      <td><b>숫자 하나 고치면 전 메뉴가 즉시</b> — 위 계산기가 그 동작입니다</td></tr>
+      <tr class="us"><td><b>한 달 재료비 집계</b></td>
+      <td>명세서를 모아 더합니다. 1~2시간</td>
+      <td>물건 들어올 때 입력해 둔 것이 쌓여 <b>월말에 저절로</b></td></tr>
+      <tr><td><b>메뉴별로 얼마 남는지</b></td>
+      <td>계산하지 않습니다. 감으로 압니다</td>
+      <td>판매 잔수 × 잔당 남는 돈. <b>매일 자동</b></td></tr>
+      <tr class="us"><td><b>이론과 실제의 차이 (손실)</b></td>
+      <td><b>알 수 없습니다.</b> 새는 돈이 있어도 안 보입니다</td>
+      <td>월 마감에 자동. <b>어느 재료에서 새는지까지</b></td></tr>
+      <tr><td><b>얼마를 팔아야 본전인가</b></td><td>감으로 짐작합니다</td><td>고정비·인건비를 넣어 두면 자동</td></tr>
+      <tr><td><b>원가율이 높은 메뉴 찾기</b></td><td>눈으로 훑습니다</td><td>넘는 메뉴에 자동으로 표시</td></tr>
+      <tr><td><b>버린 것·서비스로 나간 것 반영</b></td><td>반영되지 않습니다</td><td>그때 적어 두면 원가에 자동 반영</td></tr>
+      <tr><td><b>부가세·카드 수수료 빼고 실제 남는 돈</b></td>
+      <td>따로 계산하지 않아 <b>장부는 흑자인데 통장이 마르는</b> 일이 생깁니다</td>
+      <td>계산 순서에 넣어 두면 자동</td></tr>
+    </tbody>
+    <caption>왼쪽은 없애야 할 일이 아니라 <b>지금은 시간이 없어 아예 안 하고 있는 일</b>입니다.
+    정산 시스템은 그 계산을 대신하는 것이지, 새로운 일을 늘리는 것이 아닙니다.
+    사람이 새로 하게 되는 일은 <b>하루 5분 마감 입력 하나</b>입니다.</caption>
+  </table></div>
+</section>
+
+<section id="why">
+  <div class="sec-h"><span class="no">3</span><div>
     <h3>지금 원가 계산이 안 되는 이유</h3>
     <p class="sub">원가에는 두 종류가 있는데 우리는 한쪽만 가지고 있습니다</p>
   </div></div>
@@ -92,14 +166,14 @@
   <div class="cols2">
     <div class="card">
       <h4 style="margin-top:2px">이론원가 — 있습니다</h4>
-      <p>레시피에 적힌 양 × 재료 단가입니다. 아케이드 블랙은 잔당 <b>2,390원</b>, 이 숫자는 02 메뉴 페이지에 여덟 개 다 있습니다.</p>
+      <p>레시피에 적힌 양 × 재료 단가입니다. 위 1장 계산기가 내는 숫자가 이것입니다.</p>
       <p class="muted">쓸모: 판매가를 정할 때, 메뉴를 뺄지 말지 정할 때</p>
     </div>
     <div class="card">
       <h4 style="margin-top:2px">실제원가 — 없습니다</h4>
       <p>실제로 쓴 재료값입니다. 계산은 이렇게 합니다.</p>
       <p><code>월초 재고 + 이번 달 매입 − 월말 재고</code></p>
-      <p>지금 없는 것은 <b>매입 기록</b>과 <b>월말 재고 실사</b>입니다. 이 둘이 없으면 실제원가가 나오지 않습니다.</p>
+      <p>지금 없는 것은 <b>매입 기록</b>과 <b>월말 재고 세기</b>입니다. 이 둘이 없으면 실제원가가 나오지 않습니다.</p>
     </div>
   </div>
 
@@ -111,243 +185,117 @@
   </div>
 </section>
 
-<section id="stack">
-  <div class="sec-h"><span class="no">2</span><div>
-    <h3>어디에 올리나 — 카페24 웹호스팅</h3>
-    <p class="sub">쓰는 사람이 서너 명이라 큰 서버가 필요하지 않습니다</p>
+<section id="pos">
+  <div class="sec-h"><span class="no">4</span><div>
+    <h3>POS에서 자료를 꺼내 붙일 수 있나</h3>
+    <p class="sub">결론부터 — POS가 어느 회사 것이든 됩니다. 방식만 달라집니다</p>
   </div></div>
   <div class="rule"></div>
 
   <div class="tw wrapn"><table>
-    <thead><tr><th style="width:20%">항목</th><th style="width:32%">권고</th><th>이유</th></tr></thead>
+    <thead><tr><th style="width:22%">방식</th><th style="width:38%">어떻게</th><th>난이도와 판단</th></tr></thead>
     <tbody>
-      <tr class="us"><td><b>호스팅</b></td><td><b>웹호스팅 (리눅스 · PHP + MySQL)</b></td>
-      <td>정산 시스템은 손님이 아니라 <b>직원 서너 명</b>이 씁니다. 화면을 열고 DB에 쓰는 게 전부라, 가장 싸고 가장 안 멈추는 구성입니다</td></tr>
-      <tr class="us"><td><b>DB</b></td><td>웹호스팅에 <b>MySQL 포함</b></td><td>DB 서버를 따로 사지 않아도 됩니다. 별도 구매는 규모가 훨씬 커진 뒤 이야기입니다</td></tr>
-      <tr><td><b>도메인</b></td><td><code>.com</code> 또는 <code>.co.kr</code> 하나</td><td>손님용 소개와 관리자 화면을 한 주소 아래 둡니다</td></tr>
+      <tr class="us"><td><b>엑셀 내려받기</b><br><span class="muted">권고</span></td>
+      <td>POS 관리자 사이트에서 기간을 골라 매출 파일을 내려받고, 그 파일을 정산 화면에 올립니다</td>
+      <td><b>쉽습니다.</b> 요즘 POS는 거의 다 됩니다. <b>POS 회사가 어디든 상관없어서</b> 나중에 POS를 바꿔도 시스템을 안 고칩니다</td></tr>
+      <tr><td>공식 연동(API)</td>
+      <td>POS 회사가 열어 둔 통로로 매출이 자동으로 넘어옵니다</td>
+      <td>회사마다 제공 여부가 다르고 사업자 승인 절차가 붙습니다. <b>엑셀 방식이 자리 잡은 뒤에</b> 붙일 항목입니다</td></tr>
+      <tr><td>손으로 입력</td>
+      <td>화면을 보고 숫자를 옮겨 적습니다</td>
+      <td>POS에 내려받기가 없을 때만. 하루 5분이면 되지만 메뉴별 잔수까지는 부담이 됩니다</td></tr>
+    </tbody>
+    <caption><b>그래서 POS 종류를 몰라도 설계는 흔들리지 않습니다.</b> 엑셀 내려받기를 기본으로 잡아 두면 됩니다.</caption>
+  </table></div>
+
+  <div class="note good">
+    <b>POS에서 확인할 것 세 가지</b>
+    관리자 사이트에 들어가 이 셋이 되는지만 봐 주시면 됩니다.
+    ① <b>기간을 골라 매출을 엑셀로 내려받기</b>가 되는가 ·
+    ② 그 파일에 <b>메뉴별 판매 잔수</b>가 들어 있는가 ·
+    ③ <b>결제수단별 금액</b>(현금·카드·간편결제)이 나뉘어 있는가.
+    셋 다 되면 일 마감이 1분으로 줄고, ②가 안 되면 잔수만 손으로 적게 됩니다.
+  </div>
+</section>
+
+<section id="host">
+  <div class="sec-h"><span class="no">5</span><div>
+    <h3>어디에 올리나</h3>
+    <p class="sub">쓰는 사람이 몇 명뿐이라 큰 서버가 필요하지 않습니다</p>
+  </div></div>
+  <div class="rule"></div>
+
+  <div class="tw wrapn"><table>
+    <thead><tr><th style="width:22%">항목</th><th style="width:32%">권고</th><th>이유</th></tr></thead>
+    <tbody>
+      <tr class="us"><td><b>호스팅</b></td><td><b>카페24 웹호스팅<br>(리눅스 · PHP + MySQL)</b></td>
+      <td>화면을 열고 자료를 넣고 빼는 게 전부입니다. 가장 싸고 가장 안 멈추는 구성입니다</td></tr>
+      <tr><td><b>데이터베이스</b></td><td>웹호스팅에 <b>MySQL 포함</b></td><td>따로 사지 않아도 됩니다</td></tr>
+      <tr><td><b>도메인</b></td><td><code>.com</code> 또는 <code>.co.kr</code> 하나</td><td>소개 페이지와 정산 화면을 한 주소 아래 둡니다</td></tr>
       <tr><td><b>보안 인증서</b></td><td>무료 제공분</td><td>로그인이 있으니 <code>https</code>는 반드시 필요합니다</td></tr>
       <tr><td class="muted">서버호스팅·클라우드</td><td class="muted">쓰지 않습니다</td>
-      <td class="muted">서버 관리를 사람이 직접 해야 하고, 보안 업데이트가 밀리면 그게 사고가 됩니다. 웹호스팅은 그 일을 카페24가 합니다</td></tr>
+      <td class="muted">서버 관리를 사람이 직접 해야 하고, 보안 업데이트가 밀리면 그게 사고가 됩니다</td></tr>
     </tbody>
-    <caption>요금은 시점마다 바뀌므로 신청 화면에서 확인합니다. 이 표는 상품 종류만 정한 것입니다.</caption>
+    <caption>요금은 시점마다 바뀌므로 신청 화면에서 확인합니다. 이 표는 상품 종류만 정한 것입니다.
+    <b>매출 자료는 이 데이터베이스에만 넣습니다</b> — 지금 이 허브가 올라가 있는 깃허브는 공개라, 그쪽으로 넘어가지 않도록 선을 그어 둡니다.</caption>
   </table></div>
 
-  <h4>주소 구조</h4>
-  <div class="tw wrapn"><table>
-    <thead><tr><th style="width:34%">주소</th><th>무엇</th></tr></thead>
-    <tbody>
-      <tr><td><code>/</code></td><td>손님용 소개 — 지금 허브를 다듬어서</td></tr>
-      <tr><td><code>/hub/</code></td><td>내부 검토 자료 — 지금 이 페이지들 그대로, 검색 차단</td></tr>
-      <tr class="us"><td><code>/admin/</code></td><td><b>관리자 정산 시스템 — 로그인해야 열립니다</b></td></tr>
-    </tbody>
-    <caption><b>매출 자료는 카페24 데이터베이스에만 넣습니다.</b> 지금 이 허브가 올라가 있는 깃허브 저장소는 공개 상태라,
-    매출·인건비가 그쪽으로 넘어가지 않도록 처음부터 선을 그어 둡니다.</caption>
-  </table></div>
-
-  <div class="note good">
-    <b>PHP를 쓰는 이유</b>
-    지금 쓰시는 시스템은 언어가 다르지만 <b>구조가 같습니다</b> — 파일을 FTP로 올리고, 페이지 안에서 DB를 불러 화면을 그립니다.
-    파일질라로 올리는 작업 흐름도 지금과 똑같습니다. 요즘 방식(Node 계열)은 카페24 일반 웹호스팅에서 돌지 않아
-    서버를 따로 빌려야 하는데, 이 규모에는 과합니다.
-  </div>
-</section>
-
-<section id="db">
-  <div class="sec-h"><span class="no">3</span><div>
-    <h3>데이터 구조 — 표 열두 개</h3>
-    <p class="sub">기준 정보는 가끔 고치고, 거래 기록은 매일 쌓입니다</p>
-  </div></div>
-  <div class="rule"></div>
-
-  <h4>기준 정보 — 자주 안 바뀝니다</h4>
-  <div class="tw wrapn"><table>
-    <thead><tr><th style="width:20%">표</th><th style="width:46%">담는 것</th><th>지금 상태</th></tr></thead>
-    <tbody>
-      <tr class="us"><td><b>재료</b></td><td>재료명 · 규격(500g) · 매입가 · <b>g당 단가</b> · 거래처</td>
-      <td><b>있습니다</b> — <code>data/ingredient-prices-20260730.csv</code></td></tr>
-      <tr class="us"><td><b>레시피</b></td><td>메뉴별로 어떤 재료를 몇 g 쓰는지 (메뉴 하나에 여러 줄)</td>
-      <td><b>있습니다</b> — 02 메뉴의 원가 계산식 8종</td></tr>
-      <tr><td><b>메뉴</b></td><td>메뉴명 · 네이버 등록명 · 판매가 · 잔 크기 · 판매 여부</td><td>있습니다</td></tr>
-      <tr><td><b>거래처</b></td><td>상호 · 연락처 · 취급 품목 · 결제 조건</td><td>없습니다 — 8월 견적 때 만듭니다</td></tr>
-      <tr><td><b>직원</b></td><td>이름 · 시급 · 담당 · 재직 여부</td><td>없습니다</td></tr>
-      <tr><td><b>고정비</b></td><td>항목명(임대료·전기·통신) · 월 금액 · 시작일</td><td>없습니다</td></tr>
-    </tbody>
-    <caption><b>레시피 표가 이 시스템의 심장입니다.</b> 원두 단가 한 줄만 고치면 여덟 메뉴 원가가 한꺼번에 다시 계산됩니다.
-    아래 5장이 바로 그 동작입니다.</caption>
-  </table></div>
-
-  <h4>거래 기록 — 매일 쌓입니다</h4>
-  <div class="tw wrapn"><table>
-    <thead><tr><th style="width:20%">표</th><th style="width:46%">담는 것</th><th>언제 넣나</th></tr></thead>
-    <tbody>
-      <tr class="us"><td><b>일 매출</b></td><td>날짜 · 총매출 · 현금 · 카드 · <b>카드 수수료</b> · 배달앱 · 손님 수</td><td>마감 때</td></tr>
-      <tr class="us"><td><b>메뉴별 판매</b></td><td>날짜 · 메뉴 · 잔수 · 금액 · <b>시간대</b></td><td>마감 때</td></tr>
-      <tr><td><b>매입</b></td><td>날짜 · 거래처 · 총액 · 부가세 · 결제 여부</td><td>물건 들어올 때</td></tr>
-      <tr><td><b>매입 명세</b></td><td>매입 건별로 어떤 재료를 몇 개 얼마에</td><td>물건 들어올 때</td></tr>
-      <tr><td><b>폐기·증정</b></td><td>날짜 · 재료 또는 메뉴 · 수량 · <b>사유</b>(4시간 초과 · 상함 · 서비스)</td><td>그때그때</td></tr>
-      <tr class="us"><td><b>재고 실사</b></td><td>실사일 · 재료 · <b>실제로 남은 수량</b></td><td><b>월 1회</b></td></tr>
-    </tbody>
-    <caption><b>재고 실사 한 줄이 성패를 가릅니다.</b> 월말에 30분 세는 일인데, 이걸 빠뜨리면 실제원가가 영영 나오지 않습니다.</caption>
-  </table></div>
-
-  <div class="cols2">
-    <div class="note why">
-      <b>계산 결과는 저장하지 않습니다</b>
-      원가율·손익은 화면을 열 때마다 그때그때 계산합니다. 저장해 두면 나중에 단가를 고쳤을 때
-      옛날 숫자가 남아 서로 안 맞게 됩니다.
+  <details class="inv">
+    <summary><span><b>담기는 자료의 구조</b> <span class="muted">표 열두 개 — 필요할 때만 펴 보시면 됩니다</span></span><span class="chev"></span></summary>
+    <div class="body">
+      <div class="tw wrapn"><table>
+        <thead><tr><th style="width:16%">묶음</th><th style="width:20%">표</th><th style="width:38%">담는 것</th><th>지금</th></tr></thead>
+        <tbody>
+          <tr><td rowspan="6"><b>기준 정보</b><br><span class="muted">가끔 고침</span></td>
+          <td>재료</td><td>재료명 · 규격 · 매입가 · g당 단가 · 거래처</td><td>있습니다</td></tr>
+          <tr><td>레시피</td><td>메뉴별로 어떤 재료를 몇 g 쓰는지</td><td>일부 (신메뉴 8종)</td></tr>
+          <tr><td>메뉴</td><td>메뉴명 · 판매가 · 잔 크기 · 판매 여부</td><td>있습니다</td></tr>
+          <tr><td>거래처</td><td>상호 · 연락처 · 품목 · 결제 조건</td><td>8월 견적 때</td></tr>
+          <tr><td>인건비 기준</td><td>시급 · 근무 구분</td><td>없습니다</td></tr>
+          <tr><td>고정비</td><td>임대료 · 공과금 · 통신 · 보험</td><td>없습니다</td></tr>
+          <tr><td rowspan="6"><b>거래 기록</b><br><span class="muted">매일 쌓임</span></td>
+          <td>일 매출</td><td>총매출 · 결제수단별 · 카드 수수료 · 손님 수</td><td>마감 때 입력</td></tr>
+          <tr><td>메뉴별 판매</td><td>메뉴 · 잔수 · 금액 · 시간대</td><td>POS 파일에서</td></tr>
+          <tr><td>매입</td><td>날짜 · 거래처 · 총액 · 부가세</td><td>물건 올 때</td></tr>
+          <tr><td>매입 명세</td><td>어떤 재료를 몇 개 얼마에</td><td>물건 올 때</td></tr>
+          <tr><td>폐기·증정</td><td>재료 또는 메뉴 · 수량 · 사유</td><td>그때그때</td></tr>
+          <tr><td>재고 세기</td><td>재료별 실제로 남은 수량</td><td><b>월 1회</b></td></tr>
+        </tbody>
+        <caption>계산 결과(원가율·손익)는 저장하지 않고 화면을 열 때마다 계산합니다.
+        저장해 두면 나중에 단가를 고쳤을 때 옛 숫자가 남아 서로 안 맞습니다.
+        메뉴를 내려도 줄을 지우지 않고 사용 여부만 바꿉니다 — 지난달 정산이 깨지기 때문입니다.</caption>
+      </table></div>
     </div>
-    <div class="note flag">
-      <b>줄을 지우지 않습니다</b>
-      메뉴를 내리거나 재료를 그만 써도 줄을 지우지 않고 <b>사용 여부만 "아니오"로</b> 바꿉니다.
-      지난달 매출에 들어 있는 메뉴를 지워 버리면 과거 정산이 깨집니다.
-    </div>
-  </div>
-</section>
-
-<section id="screens">
-  <div class="sec-h"><span class="no">4</span><div>
-    <h3>화면 목록과 하루 흐름</h3>
-    <p class="sub">입력은 짧게, 보는 것은 나중에</p>
-  </div></div>
-  <div class="rule"></div>
-
-  <div class="tw wrapn"><table>
-    <thead><tr><th style="width:24%">화면</th><th style="width:22%">누가</th><th>하는 일</th></tr></thead>
-    <tbody>
-      <tr class="us"><td><b>일 마감 입력</b></td><td>그날 마감 담당</td><td>매출 · 결제수단 · 메뉴별 잔수 · 폐기. <b>하루 5분</b></td></tr>
-      <tr><td>매입 등록</td><td>황헌주 대표</td><td>명세서 보고 입력</td></tr>
-      <tr class="us"><td><b>월 재고 실사</b></td><td>황헌주 대표</td><td>재료별 남은 양 입력. 월 1회 30분</td></tr>
-      <tr><td>재료 단가 관리</td><td>황헌주 대표</td><td>단가를 고치면 전 메뉴 원가가 다시 계산됩니다</td></tr>
-      <tr><td>레시피 관리</td><td>황헌주 대표</td><td>메뉴별 재료와 사용량</td></tr>
-      <tr class="us"><td><b>원가 현황</b></td><td>대표 두 분</td><td>메뉴별 원가 · 원가율 · 한 잔당 남는 금액</td></tr>
-      <tr class="us"><td><b>월 손익</b></td><td>대표 두 분</td><td>매출에서 무엇을 빼고 얼마가 남는지</td></tr>
-      <tr class="us"><td><b>손실 분석</b></td><td>대표 두 분</td><td>이론과 실제의 차이를 재료별로</td></tr>
-      <tr><td>매출 추이</td><td>대표 두 분</td><td>요일 · 시간대 · 메뉴별</td></tr>
-    </tbody>
-    <caption>권한은 두 단계면 충분합니다 — <b>입력만 되는 사람</b>과 <b>손익까지 보는 사람</b>.
-    알바생이 월 손익을 볼 이유는 없습니다.</caption>
-  </table></div>
-
-  <h4>마감 절차</h4>
-  <div class="tw wrapn"><table>
-    <thead><tr><th style="width:18%">주기</th><th style="width:52%">하는 일</th><th class="n">걸리는 시간</th></tr></thead>
-    <tbody>
-      <tr><td><b>매일</b></td><td>매출 옮겨 적기, 시재 확인, 폐기 기록, 나이트캡 잔수</td><td class="n">5분</td></tr>
-      <tr><td><b>매주</b></td><td>발주, 재료 부족분 확인</td><td class="n">10분</td></tr>
-      <tr class="us"><td><b>매월</b></td><td><b>재고 실사</b> → 실제원가 확정 → 손익 확정 → 원가율 재계산</td><td class="n">1시간</td></tr>
-    </tbody>
-    <caption>매일 5분은 이미 05 운영의 마감 체크리스트에 들어 있습니다. 여기에 <b>메뉴별 잔수</b>만 더하면 됩니다.</caption>
-  </table></div>
-</section>
-
-<section id="calc">
-  <div class="sec-h"><span class="no">5</span><div>
-    <h3>원가 계산기 — 지금 눌러 보실 수 있습니다</h3>
-    <p class="sub">재료 단가를 바꾸면 여덟 메뉴가 한꺼번에 다시 계산됩니다. 완성되면 관리자 화면에서 이대로 돌아갑니다</p>
-  </div></div>
-  <div class="rule"></div>
-
-  <div class="calc">
-    <h4>재료 단가</h4>
-    <p class="muted" style="margin:0">숫자를 고쳐 보십시오. 아래 표가 즉시 바뀝니다. 기본값은 2026-07-30 네이버쇼핑 조회가입니다.</p>
-    <div class="knobs">
-      <div class="knob"><label>원두</label><input id="k-bean" type="number" step="500" value="22000"><span class="u">원 / 1kg · 한 잔에 2샷 40g</span></div>
-      <div class="knob"><label>우유</label><input id="k-milk" type="number" step="100" value="2700"><span class="u">원 / 1L</span></div>
-      <div class="knob"><label>생크림</label><input id="k-cream" type="number" step="100" value="7000"><span class="u">원 / 1L</span></div>
-    </div>
-    <button class="reset" id="k-reset">기본값으로 되돌리기</button>
-  </div>
-
-  <div class="tw wrapn"><table id="cost-table">
-    <thead><tr>
-      <th style="width:26%">메뉴</th><th class="n" style="width:14%">판매가</th>
-      <th class="n" style="width:13%">원두</th><th class="n" style="width:13%">우유·크림</th>
-      <th class="n" style="width:12%">그 밖</th><th class="n" style="width:11%">재료비</th>
-      <th class="n" style="width:11%">원가율</th><th class="n" style="width:13%">한 잔 남는 돈</th>
-    </tr></thead>
-    <tbody></tbody>
-    <caption><b>판매가 칸도 고칠 수 있습니다.</b> 값을 넣으면 원가율이 바로 바뀝니다 —
-    "얼마를 받으면 원가율이 몇 퍼센트인가"를 그 자리에서 볼 수 있습니다.
-    원가율이 <b>30%를 넘으면 붉게</b> 표시됩니다(카페 음료에서 흔히 쓰는 상한선).
-    마롱 크림은 판매가가 아직 정해지지 않아 7,500원을 넣어 둔 값입니다.</caption>
-  </table></div>
-
-  <div class="note good">
-    <b>이 화면이 정산 시스템에서 하는 일</b>
-    원두값이 1kg에 2,000원 오르면 어느 메뉴가 몇 원 오르는지, 그래서 판매가를 올려야 하는지가 바로 나옵니다.
-    지금은 종이에 다시 계산해야 알 수 있는 것입니다. 거래처를 바꿀 때, 단가 협상을 할 때 쓰는 화면입니다.
-  </div>
-</section>
-
-<section id="pl">
-  <div class="sec-h"><span class="no">6</span><div>
-    <h3>월 손익 — 매출에서 무엇을 빼는가</h3>
-    <p class="sub">여기 숫자는 전부 예시입니다. 실제 값은 POS 자료가 오면 채웁니다</p>
-  </div></div>
-  <div class="rule"></div>
-
-  <div class="calc">
-    <h4>넣어 보실 값</h4>
-    <div class="knobs">
-      <div class="knob"><label>월 매출</label><input id="p-sales" type="number" step="1000000" value="30000000"><span class="u">원</span></div>
-      <div class="knob"><label>카드 결제 비중</label><input id="p-cardrate" type="number" step="5" value="80"><span class="u">% · 수수료는 2.0%로 계산</span></div>
-      <div class="knob"><label>재료비율</label><input id="p-cogs" type="number" step="1" value="30"><span class="u">% · 실제원가 기준</span></div>
-      <div class="knob"><label>인건비</label><input id="p-labor" type="number" step="500000" value="7000000"><span class="u">원 · 4대보험 사업주 부담 포함</span></div>
-      <div class="knob"><label>고정비</label><input id="p-fixed" type="number" step="500000" value="6000000"><span class="u">원 · 임대·공과금·통신·보험</span></div>
-      <div class="knob"><label>부가세율</label><input id="p-vat" type="number" step="1" value="10"><span class="u">%</span></div>
-    </div>
-    <button class="reset" id="p-reset">기본값으로 되돌리기</button>
-  </div>
-
-  <div class="calc" style="padding-top:6px">
-    <table class="pl" id="pl-table"><tbody></tbody></table>
-  </div>
-
-  <div class="note flag">
-    <b>여기서 가장 자주 빠뜨리는 두 가지</b>
-    <b>카드 수수료</b>와 <b>부가세</b>입니다. 매출의 일부는 애초에 우리 돈이 아닌데,
-    이 둘을 빼지 않고 계산하면 <b>장부는 매달 흑자인데 통장은 마르는</b> 상태가 됩니다.
-    정산 시스템을 만드는 가게가 가장 많이 겪는 일이라 계산 순서에 못 박아 두었습니다.
-  </div>
-
-  <div class="note why">
-    <b>손익분기 — 얼마를 팔아야 본전인가</b>
-    <span id="bep-line">계산 중</span>
-  </div>
+  </details>
 </section>
 
 <section id="plan">
-  <div class="sec-h"><span class="no">7</span><div>
+  <div class="sec-h"><span class="no">6</span><div>
     <h3>만드는 순서</h3>
     <p class="sub">입력이 먼저입니다. 보는 화면은 그 위에 얹습니다</p>
   </div></div>
   <div class="rule"></div>
 
   <div class="tw wrapn"><table>
-    <thead><tr><th class="n" style="width:8%">단계</th><th style="width:44%">무엇</th><th style="width:16%">언제</th><th>상태</th></tr></thead>
+    <thead><tr><th class="n" style="width:8%">단계</th><th style="width:46%">무엇</th><th style="width:18%">언제</th><th>상태</th></tr></thead>
     <tbody>
-      <tr class="us"><td class="n"><b>0</b></td><td><b>원가 계산기</b> — 이 페이지 5장. 호스팅 없이 화면에서만 계산</td><td>2026-08-01</td><td><span class="bdg bdg-ok">완료</span></td></tr>
-      <tr><td class="n">1</td><td>카페24 신청 · 도메인 · 허브 이전 · DB 만들기</td><td>9월</td><td><span class="bdg">대기</span></td></tr>
-      <tr><td class="n">2</td><td>로그인 + 기준 정보 화면 (재료 · 레시피 · 메뉴)</td><td>9월</td><td><span class="bdg">대기</span></td></tr>
+      <tr class="us"><td class="n"><b>0</b></td><td><b>원가 계산기</b> — 이 페이지 1장. 호스팅 없이 화면에서만 계산</td><td>2026-08-01</td><td><span class="bdg bdg-ok">완료</span></td></tr>
+      <tr><td class="n">1</td><td>레시피 실측 — 열두 메뉴의 실제 사용량을 재고 도매 견적을 받아 단가 확정</td><td>8월</td><td><span class="bdg">대기</span></td></tr>
+      <tr><td class="n">2</td><td>카페24 신청 · 도메인 · 자료 구조 만들기</td><td>9월</td><td><span class="bdg">대기</span></td></tr>
       <tr class="us"><td class="n"><b>3</b></td><td><b>일 마감 입력</b> — 이것만 돌면 시스템이 살아 있습니다</td><td>10월 오픈 전</td><td><span class="bdg">대기</span></td></tr>
-      <tr><td class="n">4</td><td>매입 등록 · 월 재고 실사</td><td>10월</td><td><span class="bdg">대기</span></td></tr>
+      <tr><td class="n">4</td><td>매입 등록 · 월 재고 세기</td><td>10월</td><td><span class="bdg">대기</span></td></tr>
       <tr><td class="n">5</td><td>원가 현황 · 월 손익 · 손실 분석</td><td>11월 (첫 월 마감 뒤)</td><td><span class="bdg">대기</span></td></tr>
     </tbody>
-    <caption><b>3단계가 분기점입니다.</b> 일 마감 입력이 매일 들어가기 시작하면 나머지는 그 위에 얹는 일이고,
+    <caption><b>3단계가 분기점입니다.</b> 마감 입력이 매일 들어가기 시작하면 나머지는 그 위에 얹는 일이고,
     입력이 안 들어가면 뒤의 화면은 전부 빈 화면입니다. 그래서 <b>입력 화면을 가장 먼저, 가장 간단하게</b> 만듭니다.</caption>
   </table></div>
 
-  <h4>지금 정하실 것 세 가지</h4>
-  <div class="tw wrapn"><table>
-    <thead><tr><th style="width:24%">정할 것</th><th>왜 필요한가</th></tr></thead>
-    <tbody>
-      <tr class="us"><td><b>도메인 이름</b></td><td>선점당하기 전에 잡아 두는 편이 좋습니다. <code>arcadecoffee.co.kr</code> 같은 형태</td></tr>
-      <tr class="us"><td><b>POS가 어느 회사 것인가</b></td>
-      <td>메뉴별 잔수를 손으로 옮겨 적을지, 파일로 내려받아 넣을지가 갈립니다.
-      <b>일 마감이 5분이 되느냐 1분이 되느냐의 차이</b>입니다</td></tr>
-      <tr><td><b>언제 신청하나</b></td><td>지금 사도 되고 9월에 사도 됩니다. 0단계는 호스팅 없이 이미 돌고 있습니다</td></tr>
-    </tbody>
-  </table></div>
+  <div class="note good">
+    <b>지금 정하실 것 세 가지</b>
+    ① <b>도메인 이름</b> — 선점당하기 전에 잡아 두는 편이 좋습니다<br>
+    ② <b>POS에서 엑셀 내려받기가 되는지</b> — 위 4장의 세 가지만 확인하면 됩니다<br>
+    ③ <b>레시피 실측 시점</b> — 8월 시제품 만들 때 같이 재면 따로 시간이 들지 않습니다
+  </div>
 </section>
 
 </div>
@@ -355,8 +303,9 @@
 <div class="foot-note">
   <div class="inner">
     <p>이 페이지의 계산은 전부 <b>보는 화면 안에서만</b> 돌아갑니다. 입력한 값은 저장되지 않고 어디로도 전송되지 않습니다.
-    재료 단가 기본값 출처: 네이버쇼핑 실거래가 2026-07-30 (<code>data/ingredient-prices-20260730.csv</code>) ·
-    레시피: 02 메뉴 원가 계산식 8종 · 이 페이지 편집: <code>hub/settle.html</code></p>
+    메뉴와 판매가: 네이버 플레이스 등록분 2026-07-30 실측(<code>data/competitor-menus-20260730.csv</code>) ·
+    원두·우유·생크림 단가: 네이버쇼핑 2026-07-30(<code>data/ingredient-prices-20260730.csv</code>) ·
+    그 밖 재료 단가와 메뉴별 사용량: 추정 · 이 페이지 편집: <code>hub/settle.html</code></p>
   </div>
 </div>
 
@@ -366,64 +315,63 @@
 <script src="assets/lightbox.js?v=5" defer></script>
 <script src="assets/mobile-table.js?v=6" defer></script>
 <script>
-/* 원가 계산기 — 레시피는 02 메뉴의 계산식 8종을 그대로 옮긴 것입니다.
-   원두·우유·생크림만 단가에 따라 움직이고, 나머지 재료는 고정값으로 둡니다
-   (시럽·토핑·부자재는 잔당 금액이 작고 자주 바뀌지 않아서). */
+/* 원가 계산기 — 아케이드커피 등록 메뉴 12가지.
+   원두·우유·생크림만 단가에 따라 움직이고, 그 밖 재료는 고정값으로 둡니다.
+   사용량과 그 밖 재료값은 추정이라 8월 레시피 실측 뒤 교체합니다. */
 (function () {
-  var BASE = { bean: 22000, milk: 2700, cream: 7000 };   // 원두 1kg · 우유 1L · 생크림 1L
+  var BASE = { bean: 22000, milk: 2700, cream: 8000 };   // 원두 1kg · 우유 1L · 생크림 1L
 
-  // beanG: 원두 g · milkMl: 우유 ml · creamMl: 생크림 ml · etc: 그 밖 재료 합계(원)
+  // beanG 원두g · milkMl 우유ml · creamMl 생크림ml · etc 그 밖 재료 합계(원, 부자재 포함)
   var MENUS = [
-    { n: '아케이드 블랙 아인슈페너', price: 6500, beanG: 40, milkMl: 150, creamMl: 55, etc: 720 },
-    { n: '아케이드 화이트',         price: 5800, beanG: 0,  milkMl: 175, creamMl: 40, etc: 427 },
-    { n: '호지차 브라운버터 라떼',   price: 6000, beanG: 0,  milkMl: 200, creamMl: 0,  etc: 570 },
-    { n: '나이트 캐모마일',         price: 5800, beanG: 0,  milkMl: 120, creamMl: 0,  etc: 800 },
-    { n: '에스프레소 토닉 (유자)',   price: 6300, beanG: 40, milkMl: 0,   creamMl: 0,  etc: 1056 },
-    { n: '나이트캡',               price: 7500, beanG: 40, milkMl: 0,   creamMl: 0,  etc: 430 },
-    { n: '피스타치오 말차 라떼',     price: 7000, beanG: 0,  milkMl: 160, creamMl: 45, etc: 2065 },
-    { n: '공주 알밤 마롱 크림 라떼', price: 7500, beanG: 40, milkMl: 190, creamMl: 50, etc: 1600 }
+    { n: '에스프레소',        p: 3000, u: '원두 20g · 작은 잔',                    beanG: 20, milkMl: 0,   creamMl: 0,  etc: 120 },
+    { n: '아메리카노',        p: 4000, u: '원두 40g(2샷) · 부자재 250원',           beanG: 40, milkMl: 0,   creamMl: 0,  etc: 250 },
+    { n: '라떼',             p: 4500, u: '원두 40g · 우유 200ml',                 beanG: 40, milkMl: 200, creamMl: 0,  etc: 250 },
+    { n: '플랫 화이트',       p: 5500, u: '원두 40g · 우유 130ml',                 beanG: 40, milkMl: 130, creamMl: 0,  etc: 250 },
+    { n: '딥블랙',           p: 5000, u: '원두 40g · 생크림 50ml · 시럽 15ml',      beanG: 40, milkMl: 0,   creamMl: 50, etc: 430 },
+    { n: '바닐라 라떼',       p: 5000, u: '원두 40g · 우유 200ml · 시럽 20ml',      beanG: 40, milkMl: 200, creamMl: 0,  etc: 490 },
+    { n: '얼그레이 크림 라떼', p: 5000, u: '우유 180ml · 생크림 40ml · 찻잎 3g',      beanG: 0,  milkMl: 180, creamMl: 40, etc: 520 },
+    { n: '루이보스 바닐라',    p: 5000, u: '우유 150ml · 티백 2 · 시럽 15ml',        beanG: 0,  milkMl: 150, creamMl: 0,  etc: 650 },
+    { n: '로얄 캐모마일',     p: 5000, u: '우유 150ml · 티백 2 · 꿀 15g',           beanG: 0,  milkMl: 150, creamMl: 0,  etc: 650 },
+    { n: '캐리비안 칵테일',    p: 5000, u: '배합 미확인 — 주스·시럽·탄산 추정',        beanG: 0,  milkMl: 0,   creamMl: 0,  etc: 950 },
+    { n: '패션 후르츠 에이드', p: 5500, u: '청 40g · 탄산수 200ml',                 beanG: 0,  milkMl: 0,   creamMl: 0,  etc: 1250 },
+    { n: '딸기 밭 라떼',      p: 6000, u: '딸기청 60g · 우유 180ml',               beanG: 0,  milkMl: 180, creamMl: 0,  etc: 1350 }
   ];
 
   var won = function (v) { return Math.round(v).toLocaleString('ko-KR') + '원'; };
   var el = function (id) { return document.getElementById(id); };
-  var num = function (id, fallback) {
-    var v = parseFloat(el(id).value);
-    return isFinite(v) && v >= 0 ? v : fallback;
-  };
+  var num = function (id, fb) { var v = parseFloat(el(id).value); return isFinite(v) && v >= 0 ? v : fb; };
 
   var tbody = document.querySelector('#cost-table tbody');
 
-  function build() {
-    MENUS.forEach(function (m, i) {
-      var tr = document.createElement('tr');
-      tr.innerHTML =
-        '<td><b>' + m.n + '</b></td>' +
-        '<td class="n edit"><input type="number" step="100" data-i="' + i + '" value="' + m.price + '"></td>' +
-        '<td class="n c-bean"></td><td class="n c-dairy"></td><td class="n c-etc"></td>' +
-        '<td class="n c-sum"></td><td class="n c-rate"></td><td class="n c-margin"></td>';
-      tbody.appendChild(tr);
-    });
-    tbody.addEventListener('input', function (e) {
-      var i = e.target.getAttribute('data-i');
-      if (i === null) return;
-      var v = parseFloat(e.target.value);
-      MENUS[i].price = isFinite(v) && v >= 0 ? v : 0;
-      render();
-    });
-  }
+  MENUS.forEach(function (m, i) {
+    var tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td><b>' + m.n + '</b><span class="use">' + m.u + '</span></td>' +
+      '<td class="n edit"><input type="number" step="100" data-i="' + i + '" value="' + m.p + '"></td>' +
+      '<td class="n c-bean"></td><td class="n c-dairy"></td><td class="n c-etc"></td>' +
+      '<td class="n c-sum"></td><td class="n c-rate"></td><td class="n c-margin"></td>';
+    tbody.appendChild(tr);
+  });
+
+  tbody.addEventListener('input', function (e) {
+    var i = e.target.getAttribute('data-i');
+    if (i === null) return;
+    var v = parseFloat(e.target.value);
+    MENUS[i].p = isFinite(v) && v >= 0 ? v : 0;
+    render();
+  });
 
   function render() {
-    var bean = num('k-bean', BASE.bean) / 1000;    // 원/g
-    var milk = num('k-milk', BASE.milk) / 1000;    // 원/ml
-    var cream = num('k-cream', BASE.cream) / 1000; // 원/ml
+    var bean = num('k-bean', BASE.bean) / 1000;
+    var milk = num('k-milk', BASE.milk) / 1000;
+    var cream = num('k-cream', BASE.cream) / 1000;
 
     [].forEach.call(tbody.children, function (tr, i) {
       var m = MENUS[i];
       var b = m.beanG * bean;
       var d = m.milkMl * milk + m.creamMl * cream;
       var sum = b + d + m.etc;
-      var rate = m.price > 0 ? (sum / m.price * 100) : 0;
-      var margin = m.price - sum;
+      var rate = m.p > 0 ? (sum / m.p * 100) : 0;
 
       tr.querySelector('.c-bean').textContent = m.beanG ? won(b) : '—';
       tr.querySelector('.c-dairy').textContent = (m.milkMl || m.creamMl) ? won(d) : '—';
@@ -432,7 +380,7 @@
       var rc = tr.querySelector('.c-rate');
       rc.textContent = rate.toFixed(1) + '%';
       rc.className = 'n c-rate ' + (rate > 30 ? 'warn' : 'ok2');
-      tr.querySelector('.c-margin').textContent = won(margin);
+      tr.querySelector('.c-margin').textContent = won(m.p - sum);
     });
   }
 
@@ -444,63 +392,7 @@
     render();
   });
 
-  build();
   render();
-
-  /* ── 월 손익 ─────────────────────────────────────────── */
-  var PBASE = { sales: 30000000, cardrate: 80, cogs: 30, labor: 7000000, fixed: 6000000, vat: 10 };
-  var CARD_FEE = 0.02;   // 카드 수수료 2.0% — 계약에 따라 다릅니다
-  var plBody = document.querySelector('#pl-table tbody');
-
-  function row(label, value, cls) {
-    return '<tr' + (cls ? ' class="' + cls + '"' : '') + '><td>' + label + '</td><td>' + value + '</td></tr>';
-  }
-
-  function renderPL() {
-    var sales = num('p-sales', PBASE.sales);
-    var cardRate = num('p-cardrate', PBASE.cardrate) / 100;
-    var cogsRate = num('p-cogs', PBASE.cogs) / 100;
-    var labor = num('p-labor', PBASE.labor);
-    var fixed = num('p-fixed', PBASE.fixed);
-    var vatRate = num('p-vat', PBASE.vat) / 100;
-
-    var fee = sales * cardRate * CARD_FEE;
-    var cogs = sales * cogsRate;
-    var gross = sales - fee - cogs;
-    var op = gross - labor - fixed;
-    var vat = sales / (1 + vatRate) * vatRate;
-    var net = op - vat;
-
-    plBody.innerHTML =
-      row('월 매출', won(sales)) +
-      row('− 카드 수수료 <span class="muted">(카드 비중 × 2.0%)</span>', won(fee), 'minus') +
-      row('− 재료비 <span class="muted">(실제원가)</span>', won(cogs), 'minus') +
-      row('<b>매출총이익</b>', '<b>' + won(gross) + '</b>', 'sum') +
-      row('− 인건비', won(labor), 'minus') +
-      row('− 고정비', won(fixed), 'minus') +
-      row('<b>영업이익</b>', '<b>' + won(op) + '</b>', 'sum') +
-      row('− 부가세 예치분 <span class="muted">(매출에 포함돼 들어온 몫)</span>', won(vat), 'minus') +
-      row('<b>실제로 남는 돈</b>', '<b>' + won(net) + '</b>', 'final');
-
-    // 손익분기 — 재료비·카드수수료는 매출에 비례, 인건비·고정비는 고정
-    var varRate = cogsRate + cardRate * CARD_FEE + vatRate / (1 + vatRate);
-    var bep = varRate < 1 ? (labor + fixed) / (1 - varRate) : 0;
-    el('bep-line').innerHTML = bep > 0
-      ? '지금 넣으신 조건이면 한 달에 <b>' + won(bep) + '</b>을 팔아야 본전입니다. ' +
-        '하루로 나누면 <b>' + won(bep / 30) + '</b>입니다. ' +
-        '아메리카노 4,000원 기준으로 <b>하루 ' + Math.ceil(bep / 30 / 4000).toLocaleString('ko-KR') + '잔</b>에 해당합니다 ' +
-        '<span class="muted">(실제로는 객단가가 4,000원보다 높아 잔수는 이보다 적습니다)</span>.'
-      : '재료비율과 수수료 합이 100%를 넘어 계산되지 않습니다. 값을 다시 확인해 주십시오.';
-  }
-
-  ['p-sales', 'p-cardrate', 'p-cogs', 'p-labor', 'p-fixed', 'p-vat'].forEach(function (id) {
-    el(id).addEventListener('input', renderPL);
-  });
-  el('p-reset').addEventListener('click', function () {
-    Object.keys(PBASE).forEach(function (k) { el('p-' + k).value = PBASE[k]; });
-    renderPL();
-  });
-  renderPL();
 })();
 </script>
 </body>
