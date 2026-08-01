@@ -65,3 +65,57 @@
     label();
   }
 })();
+
+/* 좁은 화면에서 상단 메뉴 다루기
+   - 지금 보고 있는 장이 화면 밖에 있으면 가운데로 끌어옵니다
+   - 아래로 내리면 메뉴가 화면 맨 위에 붙어 따라옵니다 (어디서든 다른 장으로 바로 이동) */
+(function () {
+  var nav = null, anchor = 0, fixed = false;
+
+  function centerActive() {
+    if (!nav || nav.scrollWidth <= nav.clientWidth + 4) return;
+    var on = nav.querySelector('a.on');
+    if (!on) return;
+    var target = on.offsetLeft - (nav.clientWidth - on.offsetWidth) / 2;
+    nav.scrollTo({ left: Math.max(0, target), behavior: 'auto' });
+  }
+
+  function measure() {
+    if (!nav) return;
+    if (fixed) return;                       // 붙어 있을 때는 기준점을 다시 재지 않는다
+    anchor = nav.getBoundingClientRect().top + window.scrollY;
+    document.documentElement.style.setProperty('--navh', nav.offsetHeight + 'px');
+  }
+
+  function onScroll() {
+    if (!nav || window.innerWidth > 980) {
+      if (fixed) { document.body.classList.remove('navfix'); fixed = false; }
+      return;
+    }
+    var should = window.scrollY > anchor;
+    if (should !== fixed) {
+      fixed = should;
+      document.body.classList.toggle('navfix', fixed);
+      if (!fixed) measure();
+    }
+  }
+
+  function init() {
+    nav = document.querySelector('.side nav');
+    if (!nav) return;
+    measure();
+    centerActive();
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function () {
+      document.body.classList.remove('navfix'); fixed = false;
+      measure(); centerActive(); onScroll();
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
