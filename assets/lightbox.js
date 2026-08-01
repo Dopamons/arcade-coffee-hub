@@ -63,7 +63,7 @@
 
   document.addEventListener('click', function (e) {
     var t = e.target;
-    if (t.tagName === 'IMG' && (t.classList.contains('thumb') || t.closest('.shots'))) {
+    if (t.tagName === 'IMG' && (t.classList.contains('thumb') || t.classList.contains('thumb-logo') || t.classList.contains('thumb-full') || t.closest('.shots'))) {
       e.preventDefault();
       open(t);
       return;
