@@ -6,13 +6,19 @@
 <meta name="robots" content="noindex, nofollow">
 <title>아케이드커피 — 공간·1층 단장</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=26">
+<link rel="stylesheet" href="style.css?v=27">
 <style>
   .imgs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
   .imgs figure{margin:0;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:var(--sh-1)}
-  .imgs img{width:100%;height:150px;object-fit:cover;display:block}
+  .imgs img{width:100%;height:150px;object-fit:cover;display:block;cursor:zoom-in}
   .imgs figcaption{padding:8px 11px;font-size:13.5px;color:var(--sub);line-height:1.5}
   @media (max-width:980px){.imgs{grid-template-columns:1fr 1fr}}
+  /* 폰에서는 한 장씩 크게 — 두 칸에 넣으면 잘려서 뭘 찍은 건지 안 보입니다 */
+  @media (max-width:560px){
+    .imgs{grid-template-columns:1fr;gap:14px}
+    .imgs img{height:auto;aspect-ratio:4/3}
+    .imgs figcaption{padding:12px 15px;font-size:16.5px;color:var(--ink);line-height:1.6}
+  }
 </style>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>">
 </head>
@@ -142,12 +148,12 @@
   <div class="rule"></div>
 
   <div class="imgs">
-    <figure><img src="../07-media/store-footage/frames/IMG_9352/IMG_9352_006.jpg" alt="1층 홀 현재 — 창가와 군집 자리"><figcaption>1층 홀 현재 (창가·군집 자리)</figcaption></figure>
-    <figure><img src="../07-media/store-footage/frames/IMG_9352/IMG_9352_011.jpg" alt="1층 홀 현재 — 사인월 방향"><figcaption>1층 홀 (사인월 방향)</figcaption></figure>
-    <figure><img src="../07-media/store-footage/frames/IMG_9352/IMG_9352_007.jpg" alt="1층 바 카운터"><figcaption>1층 바 카운터</figcaption></figure>
-    <figure><img src="../07-media/store-footage/frames/IMG_9355/IMG_9355_004.jpg" alt="2층 참고 톤 — 원형 테이블"><figcaption>2층 참고 톤 (원형 테이블)</figcaption></figure>
-    <figure><img src="../07-media/store-footage/frames/IMG_9357/IMG_9357_019.jpg" alt="2층 참고 톤 — 창가"><figcaption>2층 참고 톤 (창가)</figcaption></figure>
-    <figure><img src="../07-media/store-footage/frames/IMG_9358/IMG_9358_004.jpg" alt="테라스 — 철거 전 기록"><figcaption>테라스 (철기둥 철거 전 기록)</figcaption></figure>
+    <figure><img src="assets/store/IMG_9352_006.jpg" alt="1층 홀 현재 — 창가와 군집 자리"><figcaption>1층 홀 현재 (창가·군집 자리)</figcaption></figure>
+    <figure><img src="assets/store/IMG_9352_011.jpg" alt="1층 홀 현재 — 사인월 방향"><figcaption>1층 홀 (사인월 방향)</figcaption></figure>
+    <figure><img src="assets/store/IMG_9352_007.jpg" alt="1층 바 카운터"><figcaption>1층 바 카운터</figcaption></figure>
+    <figure><img src="assets/store/IMG_9355_004.jpg" alt="2층 참고 톤 — 원형 테이블"><figcaption>2층 참고 톤 (원형 테이블)</figcaption></figure>
+    <figure><img src="assets/store/IMG_9357_019.jpg" alt="2층 참고 톤 — 창가"><figcaption>2층 참고 톤 (창가)</figcaption></figure>
+    <figure><img src="assets/store/IMG_9358_004.jpg" alt="테라스 — 철거 전 기록"><figcaption>테라스 (철기둥 철거 전 기록)</figcaption></figure>
   </div>
 </section>
 
@@ -251,6 +257,7 @@
 </div>
 </main>
 </div>
+<script src="assets/lightbox.js?v=5" defer></script>
 <script src="assets/mobile-table.js?v=6" defer></script>
 </body>
 </html>

@@ -445,9 +445,9 @@ footer code{background:#f0ece6;padding:2px 7px;border-radius:5px;font-size:13.5p
   td:has(.thumb){padding-bottom:2px}
   .shotrow{max-width:230px}
 
-  /* 사진 */
-  .shots{grid-template-columns:1fr 1fr;gap:11px}
-  .shots figcaption{font-size:12.5px}
+  /* 사진 — 폰에서는 한 장씩 크게. 두 칸에 넣으면 잘려서 뭘 찍은 건지 안 보입니다 */
+  .shots{grid-template-columns:1fr;gap:16px}
+  .shots figcaption{margin-top:9px;font-size:16.5px;line-height:1.6;color:var(--ink)}
   .menu-shots{grid-template-columns:1fr 1fr;gap:8px}
   .shotrow{gap:5px}
   .shotrow .thumb{max-width:calc(50% - 2.5px)}

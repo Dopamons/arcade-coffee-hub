@@ -63,7 +63,7 @@
 
   document.addEventListener('click', function (e) {
     var t = e.target;
-    if (t.tagName === 'IMG' && (t.classList.contains('thumb') || t.classList.contains('thumb-logo') || t.classList.contains('thumb-full') || t.closest('.shots'))) {
+    if (t.tagName === 'IMG' && (t.classList.contains('thumb') || t.classList.contains('thumb-logo') || t.classList.contains('thumb-full') || t.closest('.shots, .imgs'))) {
       e.preventDefault();
       open(t);
       return;
@@ -75,6 +75,21 @@
       if (inner) open(inner);
     }
   });
+
+  /* .imgs 안의 사진에 설명과 묶음 이름을 붙여 준다 — 좌우로 넘길 수 있게 */
+  function tagImgs() {
+    document.querySelectorAll('.imgs').forEach(function (g, gi) {
+      g.querySelectorAll('img').forEach(function (im) {
+        if (!im.getAttribute('data-gal')) im.setAttribute('data-gal', 'imgs' + gi);
+        if (!im.getAttribute('data-cap')) {
+          var fc = im.closest('figure') && im.closest('figure').querySelector('figcaption');
+          if (fc) im.setAttribute('data-cap', fc.textContent.trim());
+        }
+      });
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', tagImgs);
+  else tagImgs();
 
   document.addEventListener('keydown', function (e) {
     if (!box || !box.classList.contains('on')) return;
