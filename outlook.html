@@ -16,7 +16,7 @@
   tr.r-low{background:var(--ok-tint)}
   .lg{display:flex;gap:16px;font-size:14px;color:var(--sub);margin:8px 0 0;flex-wrap:wrap}
   .lg i{width:13px;height:13px;border-radius:3px;display:inline-block;margin-right:5px;vertical-align:-1px}
-  /* 세 가지 경우 — 표 대신 카드 세 장 */
+  /* 월 매출 세 갈래 — 표 대신 카드 세 장 */
   .scens{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:16px 0 4px}
   .scen{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
     box-shadow:var(--sh-1);padding:16px 18px 18px;border-top:4px solid var(--line-2)}
@@ -76,7 +76,7 @@
 <div class="hero">
   <div class="inner">
     <span class="eyebrow">06 전망 · 리스크와 기회</span>
-    <h2>외부 환경과 세 가지 시나리오</h2>
+    <h2>외부 환경과 월 매출 세 갈래</h2>
     <p>세 줄로 요약됩니다. 시장은 줄지만 우리는 생존자 쪽이고(리뷰 1,276·별점 4.51),
     가장 큰 리스크는 밖이 아니라 안(유입 -38%와 멈췄던 마케팅)이며,
     기회의 1순위는 야간입니다 — 선점 기한은 2028년 5월까지 약 1년 8개월.</p>
@@ -87,39 +87,40 @@
 
 <section id="scen">
   <div class="sec-h"><span class="no">1</span><div>
-    <h3>세 가지 경우 — 잘 될 때, 보통일 때, 안 될 때</h3>
-    <p class="sub">2026년 10월에 연다고 보고, 우리 매장이 어디까지 갈 수 있는지를 세 갈래로 적었습니다</p>
+    <h3>월 매출 세 갈래 — 기준 · 목표 · 정체</h3>
+    <p class="sub">2026년 10월에 연다고 보고, 무엇을 하느냐에 따라 <b>월 매출</b>이 어디로 가는지를 셋으로 적었습니다</p>
   </div></div>
   <div class="rule"></div>
 
   <div class="note why">
     <b>먼저 읽는 법</b>
     아래 매출 숫자는 <b>우리 매장 숫자가 아닙니다.</b> 우리 실제 매출은 아직 확인이 안 됐습니다(POS 자료 필요).
-    그래서 <b>유성구 카페들의 평균 매출</b>을 가져다 놓고 "우리가 그 평균쯤 가면 보통, 더 가면 잘 된 것"으로 본 것입니다.
+    그래서 <b>유성구 카페들의 평균 매출</b>을 가져다 <b>기준 매출</b>로 놓고,
+    거기서 더 가면 <b>목표 매출</b>, 못 가면 <b>정체 매출</b>로 본 것입니다.
     비교 대상은 중도일보가 2025년에 낸 유성구 상권분석 자료입니다.
   </div>
 
-  <p><b>세 가지는 운으로 갈리지 않습니다. 무엇을 하느냐로 갈립니다.</b>
+  <p><b>세 갈래는 운으로 갈리지 않습니다. 무엇을 하느냐로 갈립니다.</b>
   아래 카드는 위에서부터 <b>"이렇게 하면 → 이렇게 됩니다"</b> 순서로 읽으시면 됩니다.</p>
 
   <div class="scens">
     <div class="scen s-mid">
-      <span class="tag">보통일 때 · 기준</span>
+      <span class="tag">기준 매출</span>
       <p class="cond">리뷰 답글을 다시 하고, 잔을 키우고, 의자를 바꾸면</p>
       <div class="big">월 1,209<small>만원</small></div>
-      <div class="bsub">유성구 카페 평균만큼</div>
+      <div class="bsub">유성구 카페 평균만큼 — 여기가 출발선입니다</div>
       <ul>
         <li>손님 한 명이 <b>12,000원</b>을 씁니다<br>
         <span class="muted">지금 동네 평균은 8,570원 — 음료 한 잔 더, 디저트 하나 더</span></li>
         <li>"봉명동카페"로 검색하면 <b>1~2위</b><br>
         <span class="muted">작년 5월까지 우리가 있던 자리입니다</span></li>
       </ul>
-      <p class="why"><b>왜 여기까지는 간다고 보나</b><br>
+      <p class="why"><b>왜 여기가 기준인가</b><br>
       리뷰 1,276건에 별점 4.51입니다. 이미 손님이 좋게 평가해 둔 가게라, 다시 보이기만 하면 평균은 갑니다.</p>
     </div>
 
     <div class="scen s-up">
-      <span class="tag">잘 될 때</span>
+      <span class="tag">목표 매출</span>
       <p class="cond">여기에 더해서 금·토를 늦게까지 열고, 블로그 체험단을 매달 꾸준히 돌리면</p>
       <div class="big">월 1,571<small>만원</small></div>
       <div class="bsub">노은3동 수준 — 유성구에서 카페 매출이 가장 높은 동네</div>
@@ -128,21 +129,21 @@
         <li>"대전대형카페"로도 위쪽에 고정<br>
         <span class="muted">이 말은 "봉명동카페"보다 3배 많이 검색됩니다</span></li>
       </ul>
-      <p class="why"><b>왜 가능하다고 보나</b><br>
+      <p class="why"><b>왜 여기까지 갈 수 있나</b><br>
       문 앞 100m 음식점의 절반 이상이 술집입니다. 그 손님들이 2차로 갈 자리가 지금 이 동네에 없습니다.</p>
     </div>
 
     <div class="scen s-dn">
-      <span class="tag">안 될 때</span>
+      <span class="tag">정체 매출</span>
       <p class="cond">답글도 홍보도 다시 시작하지 못하면</p>
       <div class="big">평균 <small>아래</small></div>
-      <div class="bsub">1,209만원에 못 미칩니다</div>
+      <div class="bsub">기준 매출 1,209만원에 못 미칩니다</div>
       <ul>
         <li>손님 한 명이 <b>5,000원대</b>에 머무릅니다<br>
         <span class="muted">아메리카노만 팔리는 상태</span></li>
         <li>가게 <b>이름을 아는 사람만</b> 찾아옵니다</li>
       </ul>
-      <p class="why"><b>왜 그렇게 되나</b><br>
+      <p class="why"><b>왜 제자리에 머무나</b><br>
       르뺑·에이트는 계속 글을 올리는데 우리만 멈춰 있으면, 검색에서 자리를 계속 내주게 됩니다.</p>
     </div>
   </div>
@@ -293,7 +294,7 @@
 <details class="ai">
   <summary><span><span class="tag-ai">AI 분석</span>전망을 보고 드리는 참고 의견</span><span class="chev"></span></summary>
   <div class="body">
-    <p><b>기본안과 비관안의 차이는 외부 환경이 아니라 내부 실행입니다.</b> 시나리오 표를 다시 보시면, 조건 칸에 적힌 것들
+    <p><b>기준 매출과 정체 매출을 가르는 것은 외부 환경이 아니라 우리 실행입니다.</b> 위 카드를 다시 보시면, 조건 줄에 적힌 것들
     (답글·컵·좌석)은 전부 우리 손안에 있는 일입니다. 운에 걸린 계획이 아니라는 뜻이고, 이건 드문 경우입니다.</p>
     <p><b>2028년이라는 시한은 위협이 아니라 목표 시점으로 쓰는 편이 낫습니다.</b> "1년 8개월 안에 리뷰 4,340을 따라잡는다"는 구체적 마감이 있으면
     매주 리뷰 몇 건이 필요한지 역산이 됩니다. 대략 주당 30건 페이스인데, 지금 0건에서 출발하니 첫 목표는
