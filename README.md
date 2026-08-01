@@ -17,6 +17,7 @@
 | `marketing.html` | 마케팅 · 리뷰 |
 | `ops.html` | 운영 · 업무 분담 |
 | `outlook.html` | 전망 · 리스크와 기회 |
+| `settle.html` | 정산 시스템 설계 · 원가 계산기 |
 
 ## 만든 방식
 
