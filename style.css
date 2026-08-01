@@ -318,14 +318,14 @@ footer code{background:#f0ece6;padding:2px 7px;border-radius:5px;font-size:13.5p
   .side nav{flex-direction:row;overflow-x:auto;gap:8px;padding-bottom:4px;
     -webkit-overflow-scrolling:touch;scrollbar-width:none}
   .side nav::-webkit-scrollbar{display:none}
-  .side nav a{flex:0 0 auto;background:rgba(255,255,255,.08);white-space:nowrap;padding:9px 13px;font-size:14.5px}
+  .side nav a{flex:0 0 auto;background:rgba(255,255,255,.08);white-space:nowrap;padding:11px 15px;font-size:16px}
   .side nav a i{display:none}
   .side .foot,.side .meta{display:none}
-  .side h1{font-size:17px}
-  .side .mark img{width:118px}
-  .hero{padding:26px 0 20px}
-  .hero h2{font-size:27px}
-  .hero p{font-size:16.5px;max-width:100%}
+  .side h1{font-size:18px}
+  .side .mark img{width:150px}
+  .hero{padding:28px 0 22px}
+  .hero h2{font-size:28px}
+  .hero p{font-size:17.5px;line-height:1.8;max-width:100%}
   .mgrid,.cols2,.phases{grid-template-columns:1fr}
   .stats{grid-template-columns:1fr 1fr}
   .todo li{grid-template-columns:38px 1fr}
@@ -333,31 +333,66 @@ footer code{background:#f0ece6;padding:2px 7px;border-radius:5px;font-size:13.5p
   .bar{grid-template-columns:128px 1fr 72px;gap:10px}
 }
 @media (max-width:560px){
-  body{font-size:16.5px}
-  .inner{padding:0 17px}
-  .hero h2{font-size:24px}
-  .hero p{font-size:16px}
-  .sec-h h3{font-size:22px}
-  .sec-h .no{width:28px;height:28px;font-size:14px}
+  /* 60대 중후반이 폰으로 읽습니다 — 글자를 키우고 줄 간격을 넓힙니다 */
+  body{font-size:18.5px;line-height:1.8;letter-spacing:-.04em}
+  .inner{padding:0 16px}
+  .hero h2{font-size:27px;line-height:1.35}
+  .hero p{font-size:18px;line-height:1.85}
+  .hero .eyebrow{font-size:13.5px}
+  .sec-h h3{font-size:24px}
+  .sec-h .sub{font-size:16.5px}
+  .sec-h .no{font-size:21px}
+  h4{font-size:20.5px}
+  .lead{font-size:21px}
+  .muted{font-size:16.5px}
+  ul.tight li{margin:11px 0}
+  .note{font-size:17.5px;line-height:1.85;padding:16px 17px}
+  .stat .l{font-size:15px}
+  .stat .v{font-size:29px}
+  .stat .n{font-size:14px}
+  details>summary{font-size:17.5px}
 
   /* 표 — 옆으로 밀지 않습니다. 한 줄씩 세로로 풀어서 보여 줍니다 */
   .tw{overflow-x:visible}
   table,thead,tbody,tr,td{display:block;width:auto!important}
   .tw table{min-width:0}
   thead{display:none}
-  table{font-size:15.5px;min-width:0}
-  tbody tr{border-bottom:1px solid var(--line);padding:4px 0}
+  table{font-size:17.5px;min-width:0}
+  tbody tr{border-bottom:1px solid var(--line);padding:8px 0}
   tbody tr:last-child{border-bottom:0}
   tbody tr:hover{background:transparent}
-  td{border:0!important;padding:6px 14px;line-height:1.65}
+  td{border:0!important;padding:7px 15px;line-height:1.75}
+
+  /* 줄의 제목 — 머리글 이름 없이 크게 */
+  td[data-first]{padding:12px 15px 4px;font-size:19px;font-weight:700;line-height:1.5;letter-spacing:-.04em}
+  td[data-first]::before{display:none}
+  td[data-media]{padding:12px 15px 0}
+  /* 번호·배지 — 제목 위에 작게 */
+  td[data-tag]{padding:10px 15px 0;font-size:15px;color:var(--sub)}
+  td[data-tag]::before{display:none}
+  td[data-tag] .rank{width:26px;height:26px;font-size:13px}
+  td[data-first]+td[data-label]::before{margin-top:0}
+
+  /* 나머지 칸 — 머리글 이름을 위에 작게 */
   td[data-label]::before{
     content:attr(data-label);display:block;
-    font-size:12px;font-weight:800;letter-spacing:.02em;color:var(--sub);margin-bottom:2px;
+    font-size:14px;font-weight:700;letter-spacing:0;color:var(--sub);margin-bottom:2px;
   }
+  /* 값이 짧으면 한 줄로 붙입니다 — "# / 1" 처럼 갈라지지 않게 */
+  td[data-inline]{display:flex;gap:9px;align-items:baseline;flex-wrap:wrap}
+  td[data-inline]::before{margin:0;flex:0 0 auto}
+
   td.n{text-align:left;white-space:normal}
-  td[data-full]{background:var(--brand-tint);font-weight:700;padding:9px 14px;margin:6px 0}
+  td[data-full]{background:var(--brand-tint);font-weight:700;padding:11px 15px;margin:10px 0;font-size:17px}
   tr.us{background:var(--brass-tint)!important;border-radius:10px}
-  caption{display:block;font-size:13.5px;padding:11px 14px}
+  caption{display:block;font-size:16px;line-height:1.8;padding:13px 15px}
+
+  /* 줄바꿈 — 한국어가 어색한 데서 끊기지 않게 */
+  body,td,p,li,figcaption,caption,.note,.sub{word-break:keep-all;overflow-wrap:break-word}
+  .hero h2,.sec-h h3,h4,.lead,td[data-first]{word-break:keep-all;text-wrap:balance}
+  code,.hex{word-break:break-all}
+  .bdg,.pill,.rank,td.n{white-space:nowrap}
+  .bdg-legend span{white-space:normal}
   /* 사진 칸은 머리글 없이 그대로 */
   td .shotrow,td .thumb{margin-top:2px}
   td:has(.thumb)::before{display:none}
