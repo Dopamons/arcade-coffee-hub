@@ -67,6 +67,13 @@ td a:hover .thumb{border-color:var(--brass);box-shadow:var(--sh-1)}
 .bdg.move{background:var(--brand-tint);color:var(--brand-ink);border-color:#d3d5d9}
 .bdg.swap{background:#f3ecfa;color:#5b3f86;border-color:#ded0ee}
 
+/* 보유 목록 접기 */
+details.inv{border:1px solid var(--line);background:var(--card);margin:12px 0}
+details.inv>summary{padding:15px 18px;font-size:17px}
+details.inv>summary .muted{font-weight:400;font-size:14.5px;margin-left:8px}
+details.inv>.body{padding:0 18px 14px}
+details.inv .tw{margin-top:6px}
+
 /* 추천 순위 */
 .rank{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;
   border:1px solid var(--line-2);background:var(--card);color:var(--sub);
